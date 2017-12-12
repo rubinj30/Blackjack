@@ -29,19 +29,28 @@
     </nav>
     <div class="container">
         <h5 class="center-align">Instructions</h5>
-        <p class="center-align">Try to get 21</p>
+        <p class="center-align" as>Try to get 21</p>
     </div>
     <div class="blue-text center-align section">
-        <a class="waves-effect waves-light dropdown-button btn" href="#" data-activates='dropdown1'>Deal</a>
+        <a class="waves-effect waves-light btn" id='deal' href="#">Deal</a>
+        <a class="waves-effect waves-light btn" id='hit' href="#">Hit</a>
+        <a class="waves-effect waves-light btn" id='stand' href="#">Stand</a>
     </div>
-    <div class="container">
-        <div class="row center-align" id="game-board">
+    <div class='container' id='cards-placeholder'>
+        <div class='card-images' id='dealer-cards'>
+            <h4>test</h4>
+            <img class='dealer-card-images' src='./images/back.png' />
+            <img class='dealer-card-images' src='./images/back.png' />
+        </div>
+        <div class='card-images' id='player-cards'>
+            <h4>test</h4>
+                <img class='dealer-card-images' src='./images/back.png' />
+                <img class='dealer-card-images' src='./images/back.png' />
         </div>
     </div>
 
     <!-- <img class="responsive-img z-depth-3" src="https://goo.gl/XS34fL"> -->
     <footer class="footer-copyright section page-footer green lighten-2">
-        <div class="container">Copyright &copy; 2017</div>
     </footer>
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
