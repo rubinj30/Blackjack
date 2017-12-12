@@ -1,7 +1,7 @@
 // Create Deck
 const suits = ['H', 'D', 'S', 'C']
-const cards = 'A23456789TJQK'
-const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+const cards = '23456789TJQKA'
+const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
 
 function createDeckOfCards() {
     const deckOfCards = []
@@ -43,7 +43,6 @@ function shuffleCards(deckToShuffle) {
 // Create new array with shuffled cards
 const shuffledDeckOfCards = shuffleCards(unshuffledDeckOfCards)
 
-
 // Create variables for dealFirstFourCards function
 let playerCardsValue = 0
 let dealerCardsValue = 0
@@ -55,7 +54,8 @@ let dealerCardsImages = []
 // Deal out first four cards from shuffled deck
 // One card to Player, one to dealer, one to player, one to dealer
 function dealFirstFourCards() {
-    for (let i = 0; i < 4; i++) {
+    // resets for round when 'Deal is clicked'
+    for (let i = 0; i < 4; i++) {    
         const dealtCardObj = shuffledDeckOfCards.shift()
         // first and third go to Player. Tracking values, objects, and images
         if (i % 2 === 0) {
@@ -71,11 +71,21 @@ function dealFirstFourCards() {
             console.log(dealerCardsImages)
         }
     }
+    if (playerCardsValue === 21) {
+        alert("That is 21. BLACKJACK!")
+    }
     console.log(`player: ${playerCardsValue} dealer: ${dealerCardsValue}`)
-    return playerCardsArray, dealerCardsArray
+    return playerCardsArray, dealerCardsArray, playerCardsValue, dealerCardsValue
 }
 
 $('#deal').on('click', dealFirstFourCards)
+
+// use this function to check for the player busting each time a card is drawn for them
+function checkPlayerCardsValueForBust() {
+    if (playerCardsValue > 21) {
+        alert('BUSTED! You went over 21. You lose!')
+    }
+}
 
 // deals card and outputs dealtCard object, image, and value
 let dealtCardObj = {}
@@ -86,21 +96,33 @@ let dealtCardValue = 0
 $('#hit').on('click', function() {
     dealtCardObj = shuffledDeckOfCards.shift()
     dealtCardImage = `${dealtCardObj.value}${dealtCardObj.suit}.png`
-    dealtCardValue = dealtCardObj.value
-    playerCardsValue += dealtCardValue
+    playerCardsValue += dealtCardObj.value
     playerCardsArray.push(dealtCardObj)
-    console.log(playerCardsArray)
-    return playerCardsArray
+    checkPlayerCardsValueForBust()
+    console.log(playerCardsValue)
+    return playerCardsArray, playerCardsValue
 })
 
-$('#player-cards').innerHTML = dealtCardImage
-
-// logic for determining winner
-// requires totals as parameters, which will only be provided once both players are done getting cards
-
+function giveCardsToDealerAfterStand() {
+    while (dealerCardsValue < 17) {
+    dealtCardObj = shuffledDeckOfCards.shift()
+    dealerCardsValue += dealtCardObj.value 
+    dealerCardsArray.push(dealtCardObj)
+    
+    }
+    console.log(`Dealer total: ${dealerCardsValue}`)
+    return dealerCardsValue, dealerCardsArray
+    if (dealerCardsValue > 21) {
+        console.log(`Dealer total: ${dealerCardsValue}`)
+        alert('The dealer busted. You win!')
+    }
+    else {
+    cconsole.log(`Dealer total: ${dealerCardsValue}`)
+    compareDealerAndPlayerTotals(dealerCardsValue, playerCardsValue)
+    }
+}
 
 function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
-    
     if (dealerTotal > playerTotal) {
         return 'The dealer wins this round.'
     }
@@ -111,3 +133,9 @@ function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
         return 'This round is a draw.'
     }
 }
+
+$('#stand').on('click', giveCardsToDealerAfterStand)
+
+// logic for determining winner
+// requires totals as parameters, which will only be provided once both players are done getting cards
+
