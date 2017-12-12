@@ -1,0 +1,33 @@
+
+* {
+  border: black 1px solid;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  #cards-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 500px;
+    height: 300px;
+  }
+
+.dealer-card-images {
+  height: 100px;
+  width: 60px;
+}
