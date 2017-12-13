@@ -46,61 +46,62 @@ const unshuffledDeckOfCards = deckItems.createDeckOfCards()
 const shuffledDeckOfCards = deckItems.shuffleCards(unshuffledDeckOfCards)
 
 // Create variables for dealFirstFourCards function
-let playerCardValueSum = 0
-let dealerCardsValue = 0
-let playerCardsArray = []
-let dealerCardsArray = []
-let playerCardsImages = []
-let dealerCardsImages = []
+// let playerCardValueSum = 0
+// let dealerCardsValue = 0
+// let playercards = []
+// let playersCardsImages = []
+// let  = []
 
-const dealing = {
-    playerCardValueSum: 0,
-    dealerCardValueSum: 0,
-    playerCardsArray: [],
-    dealerCardsArray: [],
-    playerCardsImages: [],
-    dealerCardsImages: [],
+const player = {
+    cardsValueSum: 0,
+    cards: [],
+    cardsImages: [],
+}
 
+const dealer = {
+    cardsValueSum: 0,
+    cards: [],
+    cardsImages: [],
 }
 
 let dealtCardObj = {}
 let dealtCardImage = ''
 let dealtCardValue = 0
+
 // Deal out first four cards from shuffled deck
 // One card to Player, one to dealer, one to player, one to dealer
-
 function dealFirstFourCards() {
     // resets for round when 'Deal is clicked'
     for (let i = 0; i < 4; i++) {
         const dealtCardObj = shuffledDeckOfCards.shift()
         // first and third go to Player. Tracking values, objects, and images
         if (i % 2 === 0) {
-            dealing.playerCardValueSum += dealtCardObj.value
-            dealing.playerCardsArray.push(dealtCardObj)
-            playerCardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
+            player.cardsValueSum += dealtCardObj.value
+            player.cards.push(dealtCardObj)
+            player.cardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
         }
         else {
-            dealing.dealerCardValueSum += dealtCardObj.value
-            dealerCardsArray.push(dealtCardObj)
-            dealerCardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
+            dealer.cardsValueSum += dealtCardObj.value
+            dealer.cards.push(dealtCardObj)
+            dealer.cardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
         }
     }
     // if Player starts 21, then they automatically win the round 
     // got a blackjack while testing and this
-    if (dealing.playerCardValueSum === 21) {
+    if (player.cardsValueSum === 21) {
         alert('That is 21. BLACKJACK! You win!')
     }
     // If Player did not get 21 immediately and the Dealer does get 21 after the deal, then the dealer automatically wins
-    else if (dealing.dealerCardValueSum === 21) {
+    else if (dealer.cardsValueSum === 21) {
         alert('The dealer has 21. They automatically win.')
     }
-    console.log(`player: ${dealing.playerCardValueSum} dealer: ${dealing.dealerCardValueSum}`)
-    return dealing.playerCardsArray, dealerCardsArray, dealing.playerCardValueSum, dealing.dealerCardValueSum
+    console.log(`player: ${player.cardsValueSum} dealer: ${dealer.cardsValueSum}`)
+    return player.cards, dealer.cards, player.cardsValueSum, dealer.cardsValueSum
 }
 
 // use this function to check for the player busting each time a card is drawn for them
 function checkPlayerCardSumValue() {
-    if (dealing.playerCardValueSum > 21) {
+    if (player.cardsValueSum > 21) {
         alert('BUSTED! You went over 21. You lose!')
     }
 }
@@ -115,11 +116,11 @@ $('#deal').on('click', dealFirstFourCards)
 $('#hit').on('click', function () {
     dealtCardObj = shuffledDeckOfCards.shift()
     dealtCardImage = `${dealtCardObj.value}${dealtCardObj.suit}.png`
-    dealing.playerCardValueSum += dealtCardObj.value
-    dealing.playerCardsArray.push(dealtCardObj)
-    console.log(`Player's Card Value Total: ${dealing.playerCardValueSum}`) // will need to place DOM image replacement here
+    player.cardsValueSum += dealtCardObj.value
+    player.cards.push(dealtCardObj)
+    console.log(`Player's Card Value Total: ${player.cardsValueSum}`) // will need to place DOM image replacement here
     checkPlayerCardSumValue() 
-    return dealing.playerCardsArray, dealing.playerCardValueSum
+    return player.cards, player.cardsValueSum
 })
 
 
@@ -137,20 +138,20 @@ function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
 }
 
 function giveCardsToDealerAfterStand() {
-    while (dealing.dealerCardValueSum < 17) {
+    while (dealer.cardsValueSum < 17) {
         dealtCardObj = shuffledDeckOfCards.shift()
-        dealing.dealerCardValueSum += dealtCardObj.value
-        dealerCardsArray.push(dealtCardObj)
+        dealer.cardsValueSum += dealtCardObj.value
+        dealer.cards.push(dealtCardObj)
     }
-    console.log(`Dealer total: ${dealing.dealerCardValueSum}`)
-    // return dealing.dealerCardValueSum, dealerCardsArray
-    if (dealing.dealerCardValueSum > 21) {
-        console.log(`Dealer total: ${dealing.dealerCardValueSum}`)
+    console.log(`Dealer total: ${dealer.cardsValueSum}`)
+    // return dealer.cardsValueSum, dealer.cardss
+    if (dealer.cardsValueSum > 21) {
+        console.log(`Dealer total: ${dealer.cardsValueSum}`)
         alert('The dealer busted. You win!')
     }
     else {
-        console.log(`Dealer total: ${dealing.dealerCardValueSum}`)
-        compareDealerAndPlayerTotals(dealing.dealerCardValueSum, dealing.playerCardValueSum)
+        console.log(`Dealer total: ${dealer.cardsValueSum}`)
+        compareDealerAndPlayerTotals(dealer.cardsValueSum, player.cardsValueSum)
     }
 }
 
