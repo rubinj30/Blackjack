@@ -56,12 +56,17 @@ const player = {
     cardsValueSum: 0,
     cards: [],
     cardsImages: [],
+    score: 0
 }
 const dealer = {
     cardsValueSum: 0,
     cards: [],
     cardsImages: [],
+    score: 0
 }
+
+
+
 
 let dealtCardObj = {}
 let dealtCardImage = ''
@@ -71,7 +76,7 @@ let dealtCardValue = 0
 // One card to Player, one to dealer, one to player, one to dealer
 function dealFirstFourCards() {
     // resets for round when 'Deal is clicked'
-    resetHand() 
+    resetHands() 
     for (let i = 0; i < 4; i++) {
         const dealtCardObj = shuffledDeckOfCards.shift()
         // first and third go to Player. Tracking values, objects, and images
@@ -89,19 +94,27 @@ function dealFirstFourCards() {
     // if Player starts 21, then they automatically win the round 
     // got a blackjack while testing and this
     if (player.cardsValueSum === 21) {
+        player.score += 1
+        console.log(`player new score ${player.score}`)
         alert('That is 21. BLACKJACK! You win!')
     }
     // If Player did not get 21 immediately and the Dealer does get 21 after the deal, then the dealer automatically wins
     else if (dealer.cardsValueSum === 21) {
-        alert('The dealer has 21. They automatically win.')
+        dealer.score += 1
+        console.log(`dealer new score ${dealer.score}`)
+        alert('The dealer has 21. They automatically win and you automatically lose.')
     }
     console.log(`player: ${player.cardsValueSum} dealer: ${dealer.cardsValueSum}`)
     return player.cards, dealer.cards, player.cardsValueSum, dealer.cardsValueSum
 }
 
 // use this function to check for the player busting each time a card is drawn for them
-function checkPlayerCardSumValue() {
+
+
+const checkPlayerCardSumValue= function() {
     if (player.cardsValueSum > 21) {
+        dealer.score += 1
+        console.log(`dealer new score ${dealer.score}`)
         alert('BUSTED! You went over 21. You lose!')
     }
 }
@@ -118,23 +131,31 @@ $('#hit').on('click', function () {
     dealtCardImage = `${dealtCardObj.value}${dealtCardObj.suit}.png`
     player.cardsValueSum += dealtCardObj.value
     player.cards.push(dealtCardObj)
+    $("#player-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
     console.log(`Player's Card Value Total: ${player.cardsValueSum}`) // will need to place DOM image replacement here
-    checkPlayerCardSumValue() 
+    setTimeout(checkPlayerCardSumValue(), 5000)
     return player.cards, player.cardsValueSum
 })
 
-function resetHand() {
+function resetHands() {
     player.cardsValueSum = 0
     player.cards = []
     dealer.cardsValueSum = 0
     dealer.cards = []
+    $('#player-cards').html('').append("<img class='card-image-size' src='./images/back.png' />")
+    $('#player-cards').append("<img class='card-image-size' src='./images/back.png' />")
+    $('#dealer-cards').html('').append("<img class='card-image-size' src='./images/back.png' />")
+    $('#dealer-cards').append("<img class='card-image-size' src='./images/back.png' />")
 }
 function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
     if (dealerTotal > playerTotal) {
-
+        dealer.score += 1
+        console.log(`dealer new score ${dealer.score}`)
         alert('The dealer wins this round.')
     }
     else if (dealerTotal < playerTotal) {
+        player.score += 1
+        console.log(`player new score ${player.score}`)
         alert('You win the round!')
     }
     else {
@@ -152,6 +173,8 @@ function giveCardsToDealerAfterStand() {
     // return dealer.cardsValueSum, dealer.cardss
     if (dealer.cardsValueSum > 21) {
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
+        dealer.score += 1
+        console.log(`dealer new score ${dealer.score}`)
         alert('The dealer busted. You win!')
     }
     else {
@@ -167,3 +190,6 @@ $('#stand').on('click', giveCardsToDealerAfterStand)
 // logic for determining winner
 // requires totals as parameters, which will only be provided once both players are done getting cards
 
+// function awardPoint() {
+
+// }
