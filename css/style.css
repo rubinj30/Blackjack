@@ -39,12 +39,6 @@ main {
   text-align: center;
 }
 
-/* .left-side {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-
 .face-photo {
   width: 125px;
   height: 100px;
