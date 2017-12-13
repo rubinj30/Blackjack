@@ -84,110 +84,122 @@ function dealFirstFourCards() {
             player.cardsValueSum += dealtCardObj.value
             player.cards.push(dealtCardObj)
             player.cardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
-            setTimeout( function () {$(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)}, 500)
+            if (i === 0) {
+                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 500)
+            }
+            else {
+                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 1500)
+            }
+
         }
         else {
             dealer.cardsValueSum += dealtCardObj.value
             dealer.cards.push(dealtCardObj)
             dealer.cardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
-            setTimeout( function() {$(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)}, 1000)
+            if (i === 1) {
+                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 1000)
+            }
+            else {
+                setTimeout( function() {$(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)}, 2000)
+            }
         }
     }
-    // if Player starts 21, then they automatically win the round 
-    // got a blackjack while testing and this
-    if (player.cardsValueSum === 21) {
-        player.score += 1
-        console.log(`player new score ${player.score}`)
-        alert('That is 21. BLACKJACK! You win!')
+        // if Player starts 21, then they automatically win the round 
+        // got a blackjack while testing and this
+        if (player.cardsValueSum === 21) {
+            player.score += 1
+            console.log(`player new score ${player.score}`)
+            alert('That is 21. BLACKJACK! You win!')
+        }
+        // If Player did not get 21 immediately and the Dealer does get 21 after the deal, then the dealer automatically wins
+        else if (dealer.cardsValueSum === 21) {
+            dealer.score += 1
+            console.log(`dealer new score ${dealer.score}`)
+            alert('The dealer has 21. They automatically win and you automatically lose.')
+        }
+        console.log(`player: ${player.cardsValueSum} dealer: ${dealer.cardsValueSum}`)
+        return player.cards, dealer.cards, player.cardsValueSum, dealer.cardsValueSum
     }
-    // If Player did not get 21 immediately and the Dealer does get 21 after the deal, then the dealer automatically wins
-    else if (dealer.cardsValueSum === 21) {
-        dealer.score += 1
-        console.log(`dealer new score ${dealer.score}`)
-        alert('The dealer has 21. They automatically win and you automatically lose.')
+
+
+    // use this function to check for the player busting each time a card is drawn for them
+
+
+    const checkPlayerCardSumValue = function () {
+        if (player.cardsValueSum > 21) {
+            dealer.score += 1
+            console.log(`dealer new score ${dealer.score}`)
+            alert('BUSTED! You went over 21. You lose!')
+        }
     }
-    console.log(`player: ${player.cardsValueSum} dealer: ${dealer.cardsValueSum}`)
-    return player.cards, dealer.cards, player.cardsValueSum, dealer.cardsValueSum
-}
 
-// use this function to check for the player busting each time a card is drawn for them
+    $('#deal').on('click', dealFirstFourCards)
 
 
-const checkPlayerCardSumValue = function () {
-    if (player.cardsValueSum > 21) {
-        dealer.score += 1
-        console.log(`dealer new score ${dealer.score}`)
-        alert('BUSTED! You went over 21. You lose!')
-    }
-}
-
-$('#deal').on('click', dealFirstFourCards)
+    // deals card and outputs dealtCard object, image, and value
 
 
-// deals card and outputs dealtCard object, image, and value
-
-
-// can do this in a function and then assign to the hit button. Don't need to have () after the function name
-$('#hit').on('click', function () {
-    dealtCardObj = shuffledDeckOfCards.shift()
-    dealtCardImage = `${dealtCardObj.value}${dealtCardObj.suit}.png`
-    player.cardsValueSum += dealtCardObj.value
-    player.cards.push(dealtCardObj)
-    $("#player-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
-    console.log(`Player's Card Value Total: ${player.cardsValueSum}`) // will need to place DOM image replacement here
-    setTimeout(checkPlayerCardSumValue(), 5000)
-    return player.cards, player.cardsValueSum
-})
-
-function resetHands() {
-    player.cardsValueSum = 0
-    player.cards = []
-    dealer.cardsValueSum = 0
-    dealer.cards = []
-    $('#player-cards').html('').append("<img class='card-image-size' id='card-image-0' src='./images/JB_card.png' />")
-    $('#player-cards').append("<img class='card-image-size' id='card-image-2' src='./images/JB_card.png' />")
-    $('#dealer-cards').html('').append("<img class='card-image-size' id='card-image-1' src='./images/JB_card.png' />")
-    $('#dealer-cards').append("<img class='card-image-size' id='card-image-3' src='./images/JB_card.png' />")
-}
-function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
-    if (dealerTotal > playerTotal) {
-        dealer.score += 1
-        console.log(`dealer new score ${dealer.score}`)
-        alert('The dealer wins this round.')
-    }
-    else if (dealerTotal < playerTotal) {
-        player.score += 1
-        console.log(`player new score ${player.score}`)
-        alert('You win the round!')
-    }
-    else {
-        alert('This round is a draw.')
-    }
-}
-
-function giveCardsToDealerAfterStand() {
-    while (dealer.cardsValueSum < 17) {
+    // can do this in a function and then assign to the hit button. Don't need to have () after the function name
+    $('#hit').on('click', function () {
         dealtCardObj = shuffledDeckOfCards.shift()
-        dealer.cardsValueSum += dealtCardObj.value
-        dealer.cards.push(dealtCardObj)
+        dealtCardImage = `${dealtCardObj.value}${dealtCardObj.suit}.png`
+        player.cardsValueSum += dealtCardObj.value
+        player.cards.push(dealtCardObj)
+        $("#player-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
+        console.log(`Player's Card Value Total: ${player.cardsValueSum}`) // will need to place DOM image replacement here
+        setTimeout(checkPlayerCardSumValue(), 5000)
+        return player.cards, player.cardsValueSum
+    })
+
+    function resetHands() {
+        player.cardsValueSum = 0
+        player.cards = []
+        dealer.cardsValueSum = 0
+        dealer.cards = []
+        $('#player-cards').html('').append("<img class='card-image-size' id='card-image-0' src='./images/JB_card.png' />")
+        $('#player-cards').append("<img class='card-image-size' id='card-image-2' src='./images/JB_card.png' />")
+        $('#dealer-cards').html('').append("<img class='card-image-size' id='card-image-1' src='./images/JB_card.png' />")
+        $('#dealer-cards').append("<img class='card-image-size' id='card-image-3' src='./images/JB_card.png' />")
     }
-    console.log(`Dealer total: ${dealer.cardsValueSum}`)
-    // return dealer.cardsValueSum, dealer.cardss
-    if (dealer.cardsValueSum > 21) {
+    function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
+        if (dealerTotal > playerTotal) {
+            dealer.score += 1
+            console.log(`dealer new score ${dealer.score}`)
+            alert('The dealer wins this round.')
+        }
+        else if (dealerTotal < playerTotal) {
+            player.score += 1
+            console.log(`player new score ${player.score}`)
+            alert('You win the round!')
+        }
+        else {
+            alert('This round is a draw.')
+        }
+    }
+
+    function giveCardsToDealerAfterStand() {
+        while (dealer.cardsValueSum < 17) {
+            dealtCardObj = shuffledDeckOfCards.shift()
+            dealer.cardsValueSum += dealtCardObj.value
+            dealer.cards.push(dealtCardObj)
+        }
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
-        dealer.score += 1
-        console.log(`dealer new score ${dealer.score}`)
-        alert('The dealer busted. You win!')
+        // return dealer.cardsValueSum, dealer.cardss
+        if (dealer.cardsValueSum > 21) {
+            console.log(`Dealer total: ${dealer.cardsValueSum}`)
+            dealer.score += 1
+            console.log(`dealer new score ${dealer.score}`)
+            alert('The dealer busted. You win!')
+        }
+        else {
+            console.log(`Dealer total: ${dealer.cardsValueSum}`)
+            compareDealerAndPlayerTotals(dealer.cardsValueSum, player.cardsValueSum)
+        }
     }
-    else {
-        console.log(`Dealer total: ${dealer.cardsValueSum}`)
-        compareDealerAndPlayerTotals(dealer.cardsValueSum, player.cardsValueSum)
-    }
-}
 
 
 
-$('#stand').on('click', giveCardsToDealerAfterStand)
+    $('#stand').on('click', giveCardsToDealerAfterStand)
 
 // logic for determining winner
 // requires totals as parameters, which will only be provided once both players are done getting cards
