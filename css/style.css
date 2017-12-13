@@ -1,6 +1,3 @@
-* {
-  border: black 1px solid;
-}
 
 body {
     display: flex;
@@ -8,23 +5,53 @@ body {
     flex-direction: column;
   }
 
-.container {
-    display: flex;
-    flex-direction: column;
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.side {
+  background-color: green;
+
+}
+.left-side {
+  width: 20vw;
+}
+.right-side {
+  width: 10vw;
+}
+
+.left-side-text {
+  color: white;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.face-photo {
+  width: 75px;
+  height: 60px;
 }
 
   main {
     flex: 1 0 auto;
+    
   }
 
-  #cards-placeholder {
+#cards-placeholder {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    width: 500px;
-    height: 300px;
-  }
+}
+
+.where-cards-dealt {
+  display: flex;
+  justify-content: center; 
+}
 
 .dealer-card-images {
   height: 120px;
