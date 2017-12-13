@@ -145,8 +145,8 @@ function resetHands() {
     dealer.cardsValueSum = 0
     dealer.cards = []
     $('#player-cards').html('').append("<img class='card-image-size' id='card-image-0' src='./images/JB_card.png' />")
-    $('#player-cards').append("<img class='card-image-size' id='card-image-1' src='./images/JB_card.png' />")
-    $('#dealer-cards').html('').append("<img class='card-image-size' id='card-image-2' src='./images/JB_card.png' />")
+    $('#player-cards').append("<img class='card-image-size' id='card-image-2' src='./images/JB_card.png' />")
+    $('#dealer-cards').html('').append("<img class='card-image-size' id='card-image-1' src='./images/JB_card.png' />")
     $('#dealer-cards').append("<img class='card-image-size' id='card-image-3' src='./images/JB_card.png' />")
 }
 function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
