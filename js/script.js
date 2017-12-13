@@ -1,47 +1,49 @@
-// Create Deck
-const suits = ['H', 'D', 'S', 'C']
-const cards = '23456789TJQKA'
-const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
-
-function createDeckOfCards() {
-    const deckOfCards = []
-    let originalIndex = 0
-    for (let i = 0; i < suits.length; i++) {
-        for (let j = 0; j < cards.length; j++) {
-            const cardToAddToDeck = {suit: suits[i],
-                                    card: cards[j],
-                                    value: values[j],
-                                    originalIndex: originalIndex}
-            deckOfCards.push(cardToAddToDeck)
-            originalIndex ++
+const deckItems = {
+    suits: ['H', 'D', 'S', 'C'],
+    cards: '23456789TJQKA',
+    values: [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11],
+    createDeckOfCards: function () {
+        const deckOfCards = []
+        let originalIndex = 0
+        for (let i = 0; i < this.suits.length; i++) {
+            for (let j = 0; j < this.cards.length; j++) {
+                const cardToAddToDeck = {
+                    suit: this.suits[i],
+                    card: this.cards[j],
+                    value: this.values[j],
+                    originalIndex: this.originalIndex
+                }
+                deckOfCards.push(cardToAddToDeck)
+                originalIndex++
+            }
         }
+        return deckOfCards
+    },
+    // Trying out Fisher-Yates model for shuffling to randomize and return new array
+    shuffleCards: function (deckToShuffle) {
+        const newDeck = []
+        let n = deckToShuffle.length
+        let i;
+        // While there remain elements to shuffle…
+        while (n) {
+            // Pick a remaining element…
+            i = Math.floor(Math.random() * deckToShuffle.length);
+            // If not already shuffled, move it to the new array.
+            if (i in deckToShuffle) {
+                newDeck.push(deckToShuffle[i]);
+                delete deckToShuffle[i];
+                n--;
+            }
+        }
+        return newDeck;
     }
-    return deckOfCards
 }
 
-const unshuffledDeckOfCards = createDeckOfCards()
+// create array of 52 unshuffled deck of cards
+const unshuffledDeckOfCards = deckItems.createDeckOfCards()
 
-// Trying out Fisher-Yates model for shuffling to randomize and return new array
-function shuffleCards(deckToShuffle) {
-    const newDeck = []
-    let n = deckToShuffle.length
-    let i;
-    // While there remain elements to shuffle…
-    while (n) {
-      // Pick a remaining element…
-      i = Math.floor(Math.random() * deckToShuffle.length);
-      // If not already shuffled, move it to the new array.
-      if (i in deckToShuffle) {
-        newDeck.push(deckToShuffle[i]);
-        delete deckToShuffle[i];
-        n--;
-      }
-    }
-    return newDeck;
-  }
-
-// Create new array with shuffled cards
-const shuffledDeckOfCards = shuffleCards(unshuffledDeckOfCards)
+// Create new array with all 52 cards after being randomly shuffled
+const shuffledDeckOfCards = deckItems.shuffleCards(unshuffledDeckOfCards)
 
 // Create variables for dealFirstFourCards function
 let playerCardsValue = 0
@@ -53,26 +55,31 @@ let dealerCardsImages = []
 
 // Deal out first four cards from shuffled deck
 // One card to Player, one to dealer, one to player, one to dealer
+
 function dealFirstFourCards() {
     // resets for round when 'Deal is clicked'
-    for (let i = 0; i < 4; i++) {    
+    for (let i = 0; i < 4; i++) {
         const dealtCardObj = shuffledDeckOfCards.shift()
         // first and third go to Player. Tracking values, objects, and images
         if (i % 2 === 0) {
             playerCardsValue += dealtCardObj.value
             playerCardsArray.push(dealtCardObj)
             playerCardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
-            console.log(playerCardsImages)
         }
         else {
             dealerCardsValue += dealtCardObj.value
             dealerCardsArray.push(dealtCardObj)
             dealerCardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
-            console.log(dealerCardsImages)
         }
     }
+    // if Player starts 21, then they automatically win the round 
+    // got a blackjack while testing and this
     if (playerCardsValue === 21) {
-        alert("That is 21. BLACKJACK!")
+        alert('That is 21. BLACKJACK! You win!')
+    }
+    // If Player did not get 21 immediately and the Dealer does get 21 after the deal, then the dealer automatically wins
+    else if (dealerCardsValue === 21) {
+        alert('The dealer has 21. They automatically win.')
     }
     console.log(`player: ${playerCardsValue} dealer: ${dealerCardsValue}`)
     return playerCardsArray, dealerCardsArray, playerCardsValue, dealerCardsValue
@@ -93,46 +100,49 @@ let dealtCardImage = ''
 let dealtCardValue = 0
 
 // can do this in a function and then assign to the hit button. Don't need to have () after the function name
-$('#hit').on('click', function() {
+$('#hit').on('click', function () {
     dealtCardObj = shuffledDeckOfCards.shift()
     dealtCardImage = `${dealtCardObj.value}${dealtCardObj.suit}.png`
     playerCardsValue += dealtCardObj.value
     playerCardsArray.push(dealtCardObj)
-    checkPlayerCardsValueForBust()
-    console.log(playerCardsValue)
+    console.log(`Player's Card Value Total: ${playerCardsValue}`) // will need to place DOM image replacement here
+    checkPlayerCardsValueForBust() 
     return playerCardsArray, playerCardsValue
 })
 
+
+function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
+    if (dealerTotal > playerTotal) {
+
+        alert('The dealer wins this round.')
+    }
+    else if (dealerTotal < playerTotal) {
+        alert('You win the round!')
+    }
+    else {
+        alert('This round is a draw.')
+    }
+}
+
 function giveCardsToDealerAfterStand() {
     while (dealerCardsValue < 17) {
-    dealtCardObj = shuffledDeckOfCards.shift()
-    dealerCardsValue += dealtCardObj.value 
-    dealerCardsArray.push(dealtCardObj)
-    
+        dealtCardObj = shuffledDeckOfCards.shift()
+        dealerCardsValue += dealtCardObj.value
+        dealerCardsArray.push(dealtCardObj)
     }
     console.log(`Dealer total: ${dealerCardsValue}`)
-    return dealerCardsValue, dealerCardsArray
+    // return dealerCardsValue, dealerCardsArray
     if (dealerCardsValue > 21) {
         console.log(`Dealer total: ${dealerCardsValue}`)
         alert('The dealer busted. You win!')
     }
     else {
-    cconsole.log(`Dealer total: ${dealerCardsValue}`)
-    compareDealerAndPlayerTotals(dealerCardsValue, playerCardsValue)
+        console.log(`Dealer total: ${dealerCardsValue}`)
+        compareDealerAndPlayerTotals(dealerCardsValue, playerCardsValue)
     }
 }
 
-function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
-    if (dealerTotal > playerTotal) {
-        return 'The dealer wins this round.'
-    }
-    else if (dealerTotal < playerTotal) {
-        return 'You win the round!'
-    }
-    else {
-        return 'This round is a draw.'
-    }
-}
+
 
 $('#stand').on('click', giveCardsToDealerAfterStand)
 
