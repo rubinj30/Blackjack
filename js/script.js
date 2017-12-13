@@ -57,7 +57,6 @@ const player = {
     cards: [],
     cardsImages: [],
 }
-
 const dealer = {
     cardsValueSum: 0,
     cards: [],
@@ -72,6 +71,7 @@ let dealtCardValue = 0
 // One card to Player, one to dealer, one to player, one to dealer
 function dealFirstFourCards() {
     // resets for round when 'Deal is clicked'
+    resetHand() 
     for (let i = 0; i < 4; i++) {
         const dealtCardObj = shuffledDeckOfCards.shift()
         // first and third go to Player. Tracking values, objects, and images
@@ -123,7 +123,12 @@ $('#hit').on('click', function () {
     return player.cards, player.cardsValueSum
 })
 
-
+function resetHand() {
+    player.cardsValueSum = 0
+    player.cards = []
+    dealer.cardsValueSum = 0
+    dealer.cards = []
+}
 function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
     if (dealerTotal > playerTotal) {
 
