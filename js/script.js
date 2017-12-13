@@ -76,7 +76,7 @@ let dealtCardValue = 0
 // One card to Player, one to dealer, one to player, one to dealer
 function dealFirstFourCards() {
     // resets for round when 'Deal is clicked'
-    resetHands() 
+    resetHands()
     for (let i = 0; i < 4; i++) {
         const dealtCardObj = shuffledDeckOfCards.shift()
         // first and third go to Player. Tracking values, objects, and images
@@ -84,11 +84,13 @@ function dealFirstFourCards() {
             player.cardsValueSum += dealtCardObj.value
             player.cards.push(dealtCardObj)
             player.cardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
+            setTimeout( function () {$(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)}, 500)
         }
         else {
             dealer.cardsValueSum += dealtCardObj.value
             dealer.cards.push(dealtCardObj)
             dealer.cardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
+            setTimeout( function() {$(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)}, 1000)
         }
     }
     // if Player starts 21, then they automatically win the round 
@@ -111,7 +113,7 @@ function dealFirstFourCards() {
 // use this function to check for the player busting each time a card is drawn for them
 
 
-const checkPlayerCardSumValue= function() {
+const checkPlayerCardSumValue = function () {
     if (player.cardsValueSum > 21) {
         dealer.score += 1
         console.log(`dealer new score ${dealer.score}`)
@@ -142,10 +144,10 @@ function resetHands() {
     player.cards = []
     dealer.cardsValueSum = 0
     dealer.cards = []
-    $('#player-cards').html('').append("<img class='card-image-size' src='./images/back.png' />")
-    $('#player-cards').append("<img class='card-image-size' src='./images/back.png' />")
-    $('#dealer-cards').html('').append("<img class='card-image-size' src='./images/back.png' />")
-    $('#dealer-cards').append("<img class='card-image-size' src='./images/back.png' />")
+    $('#player-cards').html('').append("<img class='card-image-size' id='card-image-0' src='./images/JB_card.png' />")
+    $('#player-cards').append("<img class='card-image-size' id='card-image-1' src='./images/JB_card.png' />")
+    $('#dealer-cards').html('').append("<img class='card-image-size' id='card-image-2' src='./images/JB_card.png' />")
+    $('#dealer-cards').append("<img class='card-image-size' id='card-image-3' src='./images/JB_card.png' />")
 }
 function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
     if (dealerTotal > playerTotal) {

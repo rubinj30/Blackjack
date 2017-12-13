@@ -15,7 +15,6 @@ main {
 
 .side {
   background-color: green;
-
 }
 .left-side {
   width: 20vw;
@@ -41,17 +40,16 @@ main {
 
   main {
     flex: 1 0 auto;
-    
+    /* felt color here */
   }
 
 #card-table {
-    padding-top: 20px;
+    padding-top: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
 }
-
-
 
 .where-cards-dealt {
   display: flex;
@@ -59,6 +57,7 @@ main {
 }
 
 .card-image-size {
-  height: 120px;
-  width: 80px;
+  height: 175px;
+  width: 120px;
+  margin: 0 3px 0 3px;
 }
