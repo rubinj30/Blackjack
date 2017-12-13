@@ -1,4 +1,5 @@
 
+
 body {
     display: flex;
     min-height: 100vh;
@@ -43,10 +44,14 @@ main {
     
   }
 
-#cards-placeholder {
+#card-table {
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
+
+
 
 .where-cards-dealt {
   display: flex;
