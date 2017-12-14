@@ -108,14 +108,16 @@ function dealFirstFourCards() {
         // got a blackjack while testing and this
         if (player.cardsValueSum === 21) {
             player.score += 1
+            $('#player-scoreboard').text(player.score)
             console.log(`player new score ${player.score}`)
-            alert('That is 21. BLACKJACK! You win!')
+            alert('BLACKJACK! You win!')
         }
         // If Player did not get 21 immediately and the Dealer does get 21 after the deal, then the dealer automatically wins
         else if (dealer.cardsValueSum === 21) {
             dealer.score += 1
+            $('#dealer-scoreboard').text(dealer.score)
             console.log(`dealer new score ${dealer.score}`)
-            alert('The dealer has 21. They automatically win and you automatically lose.')
+            alert('Jack Black with a Blackjack. He wins. You lose.')
         }
         console.log(`player: ${player.cardsValueSum} dealer: ${dealer.cardsValueSum}`)
         return player.cards, dealer.cards, player.cardsValueSum, dealer.cardsValueSum
@@ -128,6 +130,7 @@ function dealFirstFourCards() {
     const checkPlayerCardSumValue = function () {
         if (player.cardsValueSum > 21) {
             dealer.score += 1
+            $('#dealer-scoreboard').text(dealer.score)
             console.log(`dealer new score ${dealer.score}`)
             alert('BUSTED! You went over 21. You lose!')
         }
@@ -164,11 +167,13 @@ function dealFirstFourCards() {
     function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
         if (dealerTotal > playerTotal) {
             dealer.score += 1
+            $('#dealer-scoreboard').text(dealer.score)
             console.log(`dealer new score ${dealer.score}`)
             alert('The dealer wins this round.')
         }
         else if (dealerTotal < playerTotal) {
             player.score += 1
+            $('#player-scoreboard').text(player.score)
             console.log(`player new score ${player.score}`)
             alert('You win the round!')
         }
@@ -182,12 +187,13 @@ function dealFirstFourCards() {
             dealtCardObj = shuffledDeckOfCards.shift()
             dealer.cardsValueSum += dealtCardObj.value
             dealer.cards.push(dealtCardObj)
+            $("#dealer-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
         }
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
         // return dealer.cardsValueSum, dealer.cardss
         if (dealer.cardsValueSum > 21) {
             console.log(`Dealer total: ${dealer.cardsValueSum}`)
-            dealer.score += 1
+            player.score += 1
             console.log(`dealer new score ${dealer.score}`)
             alert('The dealer busted. You win!')
         }
