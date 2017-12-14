@@ -4,22 +4,23 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    font-family: copperplate;
   }
 
 main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #e4e3e1;
+  background-image: url('./../images/FELT.jpg')
 }
 
 .side {
-  background-color: green;
+  background-color: #26a69a;
+  width: 18vw;
+  font-size: 4vh;
 }
 
 .left-side {
-  width: 20vw;
-  font-size: 4vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -27,8 +28,6 @@ main {
 }
 
 .right-side {
-  width: 20vw;
-  font-size: 4vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -76,7 +75,8 @@ main {
   margin: 0 3px 0 3px;
   box-shadow: 0 8px 6px -6px black;
   position:relative;
-  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-      box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  /* took a border i found online and changed the px's to make it look  almost like cards on felt */
+  -webkit-box-shadow:0 5px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 5px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+      box-shadow:0 7px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   }
