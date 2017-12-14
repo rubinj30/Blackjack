@@ -70,9 +70,9 @@ main {
 }
 
 .card-image-size {
-  height: 175px;
-  width: 120px;
-  margin: 0 3px 0 3px;
+  height: 220px;
+  width: 150px;
+  margin: 0 5px;
   box-shadow: 0 8px 6px -6px black;
   position:relative;
   /* took a border i found online and changed the px's to make it look  almost like cards on felt */
