@@ -59,7 +59,7 @@ main {
   }
 
 #card-table {
-    padding-top: 15vh;
+    padding-top: 5vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -77,8 +77,17 @@ main {
   margin: 0 5px;
   box-shadow: 0 8px 6px -6px black;
   position:relative;
-  /* took a border i found online and changed the px's to make it look  almost like cards on felt */
+  /* took a border I found online and made the px's much higher for 
+  shadow to appear better on on the felt background */
   -webkit-box-shadow:0 5px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     -moz-box-shadow:0 5px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
       box-shadow:0 7px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   }
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 8vh;
+}
