@@ -113,3 +113,11 @@ footer {
   height: 8vh;
 }
 
+#hit, #stand, #deal {
+  background-image: url('./../images/FELT.jpg');
+  box-shadow: 1px 1px 1px 1px black;
+}
+
+.brand-logo {
+  text-align: center;
+}

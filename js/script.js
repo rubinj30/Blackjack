@@ -1,51 +1,48 @@
 const deckItems = {
+    shuffledCards: [],
+    unshuffledCards: [],
     suits: ['H', 'D', 'S', 'C'],
     cards: '23456789TJQKA',
     values: [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11],
     createDeckOfCards: function () {
-        const deckOfCards = []
-        let originalIndex = 0
+
         for (let i = 0; i < this.suits.length; i++) {
             for (let j = 0; j < this.cards.length; j++) {
                 const cardToAddToDeck = {
                     suit: this.suits[i],
                     card: this.cards[j],
-                    value: this.values[j]
+                    value: this.values[j],
                 }
-                deckOfCards.push(cardToAddToDeck)
-                originalIndex++
+                this.unshuffledCards.push(cardToAddToDeck)
             }
         }
-        return deckOfCards
     },
-
     // Used Fisher-Yates model for shuffling to randomize and return new array
     // it starts with one array (in my case an array of cards) and it randomly picks each item
     // from the array and pushes it to a new one, but also removes it from the original
-    shuffleCards: function (deckToShuffle) {
-        const newDeck = []
-        let n = deckToShuffle.length 
+    shuffleCards: function () {
+        this.createDeckOfCards()
+        let n = this.unshuffledCards.length 
         let i;
         // While there remain elements to shuffle…
         while (n) {
             // Pick a remaining element…
-            i = Math.floor(Math.random() * deckToShuffle.length);
+            i = Math.floor(Math.random() * this.unshuffledCards.length);
             // If not already shuffled, move it to the new array.
-            if (i in deckToShuffle) {
-                newDeck.push(deckToShuffle[i]);
-                delete deckToShuffle[i];
+            if (i in this.unshuffledCards) {
+                this.shuffledCards.push(this.unshuffledCards[i]);
+                delete this.unshuffledCards[i];
                 n--;
             }
         }
-        return newDeck;
     }
 }
 
 // create array of 52 unshuffled deck of cards
-const unshuffledDeckOfCards = deckItems.createDeckOfCards()
+// const unshuffledDeckOfCards = deckItems.createDeckOfCards()
 
 // Create new array with all 52 cards after being randomly shuffled
-const shuffledDeckOfCards = deckItems.shuffleCards(unshuffledDeckOfCards)
+// const shuffledDeckOfCards = deckItems.shuffleCards(unshuffledDeckOfCards)
 
 // 
 const player = {
@@ -66,10 +63,13 @@ let dealtCardObj = {}
 // Deal out first four cards from shuffled deck
 // One card to Player, one to dealer, one to player, one to dealer
 function dealFirstFourCards() {
+
     // resets for round when 'Deal is clicked'
     resetHands()
     for (let i = 0; i < 4; i++) {
-        const dealtCardObj = shuffledDeckOfCards.shift()
+        console.log(deckItems.shuffledCards)
+        const dealtCardObj = deckItems.shuffledCards.shift()
+        console.log(dealtCardObj)
         // first and third go to Player. Tracking values, objects, and images
         if (i % 2 === 0) {
             player.cardsValueSum += dealtCardObj.value
@@ -153,7 +153,7 @@ function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
 function giveCardsToDealerAfterStand() {
     while (dealer.cardsValueSum < 17) {
         setTimeout(1000)
-        dealtCardObj = shuffledDeckOfCards.shift()
+        dealtCardObj = deckItems.shuffledCards.shift()
         dealer.cardsValueSum += dealtCardObj.value
         dealer.cards.push(dealtCardObj)
         $("#dealer-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
@@ -172,14 +172,17 @@ function giveCardsToDealerAfterStand() {
     }
 }
 
+deckItems.shuffleCards()
+
 // clicking deal resets from the previous hand and deals out first four cards
 $('#deal').on('click', dealFirstFourCards)
 
 // can do this in a function and then assign to the hit button. Don't need to have () after the function name
 $('#hit').on('click', function () {
-    dealtCardObj = shuffledDeckOfCards.shift()
+    dealtCardObj = deckItems.shuffledCards.shift()
     dealtCardImage = `${dealtCardObj.value}${dealtCardObj.suit}.png`
     player.cardsValueSum += dealtCardObj.value
+    console.log(player.cardsValueSum)
     player.cards.push(dealtCardObj)
     $("#player-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
     console.log(`Player's Card Value Total: ${player.cardsValueSum}`) // will need to place DOM image replacement here
