@@ -90,7 +90,7 @@ function dealFirstFourCards() {
                 setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 1000)
             }
             else {
-                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 2000)
+                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size' id='card-image-${i}' src='./images/JB_card.jpg' />`) }, 2000)
             }
         }
     }
@@ -152,6 +152,7 @@ function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
 
 function giveCardsToDealerAfterStand() {
     while (dealer.cardsValueSum < 17) {
+        setTimeout(1000)
         dealtCardObj = shuffledDeckOfCards.shift()
         dealer.cardsValueSum += dealtCardObj.value
         dealer.cards.push(dealtCardObj)
@@ -186,6 +187,9 @@ $('#hit').on('click', function () {
     return player.cards, player.cardsValueSum
 })
 
+$('#stand').on('click', function() {
+    $('#card-image-3').replaceWith(`<img class='card-image-size' src='./images/${dealer.cards[1].card}${dealer.cards[1].suit}.png' />`)
+})
 $('#stand').on('click', giveCardsToDealerAfterStand)
 
 
