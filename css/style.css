@@ -18,7 +18,6 @@ main {
   background-color: #26a69a;
   width: 18vw;
   font-size: 4vh;
-  
 }
 
 .left-side {
@@ -32,9 +31,15 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   /* used padding the vertically align (relatively) in the right sidebar when short on time */
-  padding: 0 0 190px 0;
+  /* padding: 0 0  0; */
+}
+
+.players-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .side-text {
@@ -44,6 +49,7 @@ main {
 .face-photo {
   width: 125px;
   height: 100px;
+  border-radius: 75%
   
 }
 /* 
@@ -53,16 +59,16 @@ main {
   }
 } */
 
-  main {
-    flex: 1 0 auto;
-    /* felt color here */
+main {
+  flex: 1 0 auto;
+  /* felt color here */
   }
 
 #card-table {
-    padding-top: 5vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  padding-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
 }
 
@@ -75,6 +81,7 @@ main {
   height: 220px;
   width: 150px;
   margin: 0 5px;
+  border-radius: 5px;
   box-shadow: 0 8px 6px -6px black;
   position:relative;
   /* took a border I found online and made the px's much higher for 
@@ -84,6 +91,20 @@ main {
       box-shadow:0 7px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   }
 
+hr {
+  width: 90%;
+}
+
+.betting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bet-button {
+  background-color: #C62828;
+}
+
 footer {
   display: flex;
   flex-direction: row;
@@ -91,3 +112,4 @@ footer {
   align-items: center;
   height: 8vh;
 }
+

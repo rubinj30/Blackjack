@@ -10,8 +10,7 @@ const deckItems = {
                 const cardToAddToDeck = {
                     suit: this.suits[i],
                     card: this.cards[j],
-                    value: this.values[j],
-                    originalIndex: this.originalIndex
+                    value: this.values[j]
                 }
                 deckOfCards.push(cardToAddToDeck)
                 originalIndex++
@@ -19,10 +18,13 @@ const deckItems = {
         }
         return deckOfCards
     },
-    // Trying out Fisher-Yates model for shuffling to randomize and return new array
+
+    // Used Fisher-Yates model for shuffling to randomize and return new array
+    // it starts with one array (in my case an array of cards) and it randomly picks each item
+    // from the array and pushes it to a new one, but also removes it from the original
     shuffleCards: function (deckToShuffle) {
         const newDeck = []
-        let n = deckToShuffle.length
+        let n = deckToShuffle.length 
         let i;
         // While there remain elements to shuffle…
         while (n) {
@@ -45,22 +47,21 @@ const unshuffledDeckOfCards = deckItems.createDeckOfCards()
 // Create new array with all 52 cards after being randomly shuffled
 const shuffledDeckOfCards = deckItems.shuffleCards(unshuffledDeckOfCards)
 
+// 
 const player = {
     cardsValueSum: 0,
     cards: [],
-    cardsImages: [],
-    score: 0
-}
-const dealer = {
-    cardsValueSum: 0,
-    cards: [],
-    cardsImages: [],
     score: 0
 }
 
+const dealer = {
+    cardsValueSum: 0,
+    cards: [],
+    score: 0
+}
+
+// Each card dealt is dealt to this object that contains value, image
 let dealtCardObj = {}
-let dealtCardImage = ''
-let dealtCardValue = 0
 
 // Deal out first four cards from shuffled deck
 // One card to Player, one to dealer, one to player, one to dealer
@@ -73,7 +74,6 @@ function dealFirstFourCards() {
         if (i % 2 === 0) {
             player.cardsValueSum += dealtCardObj.value
             player.cards.push(dealtCardObj)
-            player.cardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
             if (i === 0) {
                 setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 500)
             }
@@ -85,7 +85,6 @@ function dealFirstFourCards() {
         else {
             dealer.cardsValueSum += dealtCardObj.value
             dealer.cards.push(dealtCardObj)
-            dealer.cardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
             if (i === 1) {
                 setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 1000)
             }
@@ -132,6 +131,7 @@ function resetHands() {
     $('#dealer-cards').html('').append("<img class='card-image-size' id='card-image-1' src='./images/JB_card.jpg' />")
     $('#dealer-cards').append("<img class='card-image-size' id='card-image-3' src='./images/JB_card.jpg' />")
 }
+
 function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
     if (dealerTotal > playerTotal) {
         dealer.score += 1
@@ -187,9 +187,12 @@ $('#hit').on('click', function () {
     return player.cards, player.cardsValueSum
 })
 
+// when 'Stand' clicked, flip the dealer's 2nd card
 $('#stand').on('click', function() {
     $('#card-image-3').replaceWith(`<img class='card-image-size' src='./images/${dealer.cards[1].card}${dealer.cards[1].suit}.png' />`)
 })
+
+// also deal out other cards
 $('#stand').on('click', giveCardsToDealerAfterStand)
 
 
