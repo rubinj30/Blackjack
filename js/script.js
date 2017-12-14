@@ -45,13 +45,6 @@ const unshuffledDeckOfCards = deckItems.createDeckOfCards()
 // Create new array with all 52 cards after being randomly shuffled
 const shuffledDeckOfCards = deckItems.shuffleCards(unshuffledDeckOfCards)
 
-// Create variables for dealFirstFourCards function
-// let playerCardValueSum = 0
-// let dealerCardsValue = 0
-// let playercards = []
-// let playersCardsImages = []
-// let  = []
-
 const player = {
     cardsValueSum: 0,
     cards: [],
@@ -64,9 +57,6 @@ const dealer = {
     cardsImages: [],
     score: 0
 }
-
-
-
 
 let dealtCardObj = {}
 let dealtCardImage = ''
@@ -85,10 +75,10 @@ function dealFirstFourCards() {
             player.cards.push(dealtCardObj)
             player.cardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
             if (i === 0) {
-                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 500)
+                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 500)
             }
             else {
-                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 1500)
+                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 1500)
             }
 
         }
@@ -97,10 +87,10 @@ function dealFirstFourCards() {
             dealer.cards.push(dealtCardObj)
             dealer.cardsImages.push(`${dealtCardObj.value}${dealtCardObj.suit}.png`)
             if (i === 1) {
-                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 1000)
+                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 1000)
             }
             else {
-                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size dealer-images' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 2000)
+                setTimeout(function () { $(`#card-image-${i}`).replaceWith(`<img class='card-image-size' id='card-image-${i}' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`) }, 2000)
             }
         }
     }
@@ -123,32 +113,14 @@ function dealFirstFourCards() {
     return player.cards, dealer.cards, player.cardsValueSum, dealer.cardsValueSum
 }
 
-
-// use this function to check for the player busting each time a card is drawn for them
-
-
 const checkPlayerCardSumValue = function () {
     if (player.cardsValueSum > 21) {
         dealer.score += 1
         $('#dealer-scoreboard').text(dealer.score)
         console.log(`dealer new score ${dealer.score}`)
-        alert('BUSTED! You went over 21. You lose!')
+        setTimeout(function() {alert('BUSTED! You went over 21. You lose!') }, 1000)
     }
 }
-// clicking deal resets from the previous hand and deals out first four cards
-$('#deal').on('click', dealFirstFourCards)
-
-// can do this in a function and then assign to the hit button. Don't need to have () after the function name
-$('#hit').on('click', function () {
-    dealtCardObj = shuffledDeckOfCards.shift()
-    dealtCardImage = `${dealtCardObj.value}${dealtCardObj.suit}.png`
-    player.cardsValueSum += dealtCardObj.value
-    player.cards.push(dealtCardObj)
-    $("#player-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
-    console.log(`Player's Card Value Total: ${player.cardsValueSum}`) // will need to place DOM image replacement here
-    setTimeout(checkPlayerCardSumValue(), 5000)
-    return player.cards, player.cardsValueSum
-})
 
 function resetHands() {
     player.cardsValueSum = 0
@@ -191,23 +163,29 @@ function giveCardsToDealerAfterStand() {
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
         player.score += 1
         $('#player-scoreboard').text(player.score)
-        setTimeout(function () {
-            alert('The dealer busted. You win!')
-        }, 1000)
+        setTimeout(function () {alert('The dealer busted. You win!')}, 1500)
     }
     else {
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
-        compareDealerAndPlayerTotals(dealer.cardsValueSum, player.cardsValueSum)
+        setTimeout(compareDealerAndPlayerTotals(dealer.cardsValueSum, player.cardsValueSum), 1000)
     }
 }
 
+// clicking deal resets from the previous hand and deals out first four cards
+$('#deal').on('click', dealFirstFourCards)
 
+// can do this in a function and then assign to the hit button. Don't need to have () after the function name
+$('#hit').on('click', function () {
+    dealtCardObj = shuffledDeckOfCards.shift()
+    dealtCardImage = `${dealtCardObj.value}${dealtCardObj.suit}.png`
+    player.cardsValueSum += dealtCardObj.value
+    player.cards.push(dealtCardObj)
+    $("#player-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
+    console.log(`Player's Card Value Total: ${player.cardsValueSum}`) // will need to place DOM image replacement here
+    setTimeout(checkPlayerCardSumValue(), 5000)
+    return player.cards, player.cardsValueSum
+})
 
 $('#stand').on('click', giveCardsToDealerAfterStand)
 
-// logic for determining winner
-// requires totals as parameters, which will only be provided once both players are done getting cards
 
-// function awardPoint() {
-
-// }
