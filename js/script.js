@@ -19,11 +19,13 @@ const deckItems = {
         }
     },
     // Used Fisher-Yates model for shuffling to randomize and return new array
+    // after seeing it in several search results and wanting to move quickly on the proj. Then forgot to go back
+    // and make my own randomization tool, which logically would have been similar. 
     // it starts with one array (in my case an array of cards) and it randomly picks each item
     // from the array and pushes it to a new one, but also removes it from the original
     shuffleCards: function () {
         this.createDeckOfCards()
-        let n = this.unshuffledCards.length 
+        let n = this.unshuffledCards.length
         let i;
         // While there remain elements to shuffle…
         while (n) {
@@ -118,7 +120,7 @@ const checkPlayerCardSumValue = function () {
         dealer.score += 1
         $('#dealer-scoreboard').text(dealer.score)
         console.log(`dealer new score ${dealer.score}`)
-        setTimeout(function() {alert('BUSTED! You went over 21. You lose!') }, 1000)
+        setTimeout(function () { alert('BUSTED! You went over 21. You lose!') }, 1000)
     }
 }
 
@@ -165,7 +167,7 @@ function giveCardsToDealerAfterStand() {
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
         player.score += 1
         $('#player-scoreboard').text(player.score)
-        setTimeout(function () {alert('The dealer busted. You win!')}, 1500)
+        setTimeout(function () { alert('The dealer busted. You win!') }, 1500)
     }
     else {
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
@@ -192,7 +194,7 @@ $('#hit').on('click', function () {
 })
 
 // when 'Stand' clicked, flip the dealer's 2nd card
-$('#stand').on('click', function() {
+$('#stand').on('click', function () {
     $('#card-image-3').replaceWith(`<img class='card-image-size' src='./images/${dealer.cards[1].card}${dealer.cards[1].suit}.png' />`)
 })
 

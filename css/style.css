@@ -1,5 +1,3 @@
-
-
 body {
     display: flex;
     min-height: 100vh;
@@ -20,20 +18,15 @@ main {
   font-size: 4vh;
 }
 
+.side-text {
+  color: white;
+}
+
 .left-side {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-}
-
-.right-side {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: space-between; */
-  /* used padding the vertically align (relatively) in the right sidebar when short on time */
-  /* padding: 0 0  0; */
 }
 
 .players-info {
@@ -42,34 +35,23 @@ main {
   align-items: center;
 }
 
-.side-text {
-  color: white;
+.right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .face-photo {
   width: 125px;
   height: 100px;
   border-radius: 75%
-  
 }
-/* 
-@media screen and (max-width:480px) {  
-  .face-photo img {
-    display: none;
-  }
-} */
-
-main {
-  flex: 1 0 auto;
-  /* felt color here */
-  }
 
 #card-table {
   padding-top: 5vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 }
 
 .where-cards-dealt {
@@ -113,7 +95,7 @@ footer {
   height: 8vh;
 }
 
-#hit, #stand, #deal {
+#deal, #hit, #stand {
   background-image: url('./../images/FELT.jpg');
   box-shadow: 1px 1px 1px 1px black;
 }
