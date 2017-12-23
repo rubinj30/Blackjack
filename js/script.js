@@ -1,4 +1,3 @@
-
 const deckItems = {
     shuffledCards: [],
     unshuffledCards: [],
@@ -18,11 +17,6 @@ const deckItems = {
             }
         }
     },
-    // Used Fisher-Yates model for shuffling to randomize and return new array
-    // after seeing it in several search results and wanting to move quickly on the proj. Then forgot to go back
-    // and make my own randomization tool, which logically would have been similar. 
-    // it starts with one array (in my case an array of cards) and it randomly picks each item
-    // from the array and pushes it to a new one, but also removes it from the original
     shuffleCards: function () {
         this.createDeckOfCards()
         let n = this.unshuffledCards.length
@@ -102,14 +96,14 @@ function dealFirstFourCards() {
         player.score += 1
         $('#player-scoreboard').text(player.score)
         console.log(`player new score ${player.score}`)
-        alert('BLACKJACK! You win!')
+        swal('BLACKJACK! You win!')
     }
     // If Player did not get 21 immediately and the Dealer does get 21 after the deal, then the dealer automatically wins
     else if (dealer.cardsValueSum === 21) {
         dealer.score += 1
         $('#dealer-scoreboard').text(dealer.score)
         console.log(`dealer new score ${dealer.score}`)
-        alert('Jack Black with a Blackjack. He wins. You lose.')
+        swal('Jack Black with a Blackjack. He wins. You lose.')
     }
     console.log(`player: ${player.cardsValueSum} dealer: ${dealer.cardsValueSum}`)
     return player.cards, dealer.cards, player.cardsValueSum, dealer.cardsValueSum
@@ -120,7 +114,7 @@ const checkPlayerCardSumValue = function () {
         dealer.score += 1
         $('#dealer-scoreboard').text(dealer.score)
         console.log(`dealer new score ${dealer.score}`)
-        setTimeout(function () { alert('BUSTED! You went over 21. You lose!') }, 1000)
+        setTimeout(function () { swal('BUSTED! You went over 21. You lose!') }, 300)
     }
 }
 
@@ -140,18 +134,19 @@ function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
         dealer.score += 1
         $('#dealer-scoreboard').text(dealer.score)
         console.log(`dealer new score ${dealer.score}`)
-        alert('The dealer wins this round.')
+        swal('The dealer wins this round.')
     }
     else if (dealerTotal < playerTotal) {
         player.score += 1
         $('#player-scoreboard').text(player.score)
         console.log(`player new score ${player.score}`)
-        alert('You win the round!')
+        swal('You win the round!')
     }
     else {
-        alert('This round is a draw.')
+        swal('This round is a draw.')
     }
 }
+
 
 function giveCardsToDealerAfterStand() {
     while (dealer.cardsValueSum < 17) {
@@ -167,7 +162,7 @@ function giveCardsToDealerAfterStand() {
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
         player.score += 1
         $('#player-scoreboard').text(player.score)
-        setTimeout(function () { alert('The dealer busted. You win!') }, 1500)
+        setTimeout(function () { swal('The dealer busted. You win!') }, 1500)
     }
     else {
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
