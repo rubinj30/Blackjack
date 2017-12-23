@@ -170,24 +170,6 @@ function giveCardsToDealerAfterStand() {
     }
 }
 
-// GETTING WEATHER INFO FOR WEATHER WIDGET //
-
-// const axios = require('axios')
-
-// axios.get("http://api.wunderground.com/api/500fc45859e1f98f/history_20171110/q/NV/Reno.json")
-//   .then((response) => {
-//     console.log('success')
-//     // console.log(response.data)
-    
-//     const firstId = response.data['history']['observations'][0]['rain']
-
-//     const secondId = response.data['history']['observations'][0]['tempi']
-//     console.log(`rain ${firstId}`)
-//     console.log(secondId)
-//   }
-
-
-
 // DEAL CARDS OUT AND PLAY GAME 
 deckItems.shuffleCards()
 
