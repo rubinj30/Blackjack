@@ -96,7 +96,7 @@ function dealFirstFourCards() {
         player.score += 1
         $('#player-scoreboard').text(player.score)
         console.log(`player new score ${player.score}`)
-        swal('BLACKJACK! You win!')
+        setTimeout(swal('BLACKJACK! You win!'), 1000)
     }
     // If Player did not get 21 immediately and the Dealer does get 21 after the deal, then the dealer automatically wins
     else if (dealer.cardsValueSum === 21) {
@@ -114,7 +114,10 @@ const checkPlayerCardSumValue = function () {
         dealer.score += 1
         $('#dealer-scoreboard').text(dealer.score)
         console.log(`dealer new score ${dealer.score}`)
-        setTimeout(function () { swal('BUSTED! You went over 21. You lose!') }, 300)
+        setTimeout(function () { swal('BUSTED! You went over 21. You lose!')
+            .then(() => {
+                resetHands()
+            }) }, 400)
     }
 }
 
@@ -134,7 +137,7 @@ function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
         dealer.score += 1
         $('#dealer-scoreboard').text(dealer.score)
         console.log(`dealer new score ${dealer.score}`)
-        swal('The dealer wins this round.')
+        setTimeout(swal('The dealer wins this round.'), 1000)
     }
     else if (dealerTotal < playerTotal) {
         player.score += 1
