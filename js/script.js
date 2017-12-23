@@ -107,7 +107,7 @@ const checkPlayerCardSumValue = function () {
         console.log(`dealer new score ${dealer.score}`)
         setTimeout(function () { swal('BUSTED! You went over 21. You lose!').then(() => {
             resetHands()
-        }) }, 400)
+        })}, 400)
     }
 }
 
@@ -170,6 +170,25 @@ function giveCardsToDealerAfterStand() {
     }
 }
 
+// GETTING WEATHER INFO FOR WEATHER WIDGET //
+
+// const axios = require('axios')
+
+// axios.get("http://api.wunderground.com/api/500fc45859e1f98f/history_20171110/q/NV/Reno.json")
+//   .then((response) => {
+//     console.log('success')
+//     // console.log(response.data)
+    
+//     const firstId = response.data['history']['observations'][0]['rain']
+
+//     const secondId = response.data['history']['observations'][0]['tempi']
+//     console.log(`rain ${firstId}`)
+//     console.log(secondId)
+//   }
+
+
+
+// DEAL CARDS OUT AND PLAY GAME 
 deckItems.shuffleCards()
 
 // clicking deal resets from the previous hand and deals out first four cards
@@ -195,5 +214,3 @@ $('#stand').on('click', function () {
 
 // also deal out other cards
 $('#stand').on('click', giveCardsToDealerAfterStand)
-
-

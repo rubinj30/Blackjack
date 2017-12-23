@@ -1,17 +1,19 @@
-
-
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
     font-family: copperplate;
+    background-image: url('./../images/FELT.jpg')
   }
 
 main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-image: url('./../images/FELT.jpg')
+}
+
+.dark-grey-color {
+  background-color: rgba(0,0,0, 0.6)
 }
 
 .side {
