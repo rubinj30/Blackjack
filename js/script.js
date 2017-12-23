@@ -35,13 +35,6 @@ const deckItems = {
     }
 }
 
-// create array of 52 unshuffled deck of cards
-// const unshuffledDeckOfCards = deckItems.createDeckOfCards()
-
-// Create new array with all 52 cards after being randomly shuffled
-// const shuffledDeckOfCards = deckItems.shuffleCards(unshuffledDeckOfCards)
-
-// 
 const player = {
     cardsValueSum: 0,
     cards: [],
@@ -95,15 +88,13 @@ function dealFirstFourCards() {
     if (player.cardsValueSum === 21) {
         player.score += 1
         $('#player-scoreboard').text(player.score)
-        console.log(`player new score ${player.score}`)
-        setTimeout(swal('BLACKJACK! You win!'), 1000)
+        setTimeout(() => {swal('BLACKJACK! You win!')}, 1000)
     }
     // If Player did not get 21 immediately and the Dealer does get 21 after the deal, then the dealer automatically wins
     else if (dealer.cardsValueSum === 21) {
         dealer.score += 1
         $('#dealer-scoreboard').text(dealer.score)
-        console.log(`dealer new score ${dealer.score}`)
-        swal('Jack Black with a Blackjack. He wins. You lose.')
+        setTimeout(() => {swal('Jack Black with a Blackjack! You lose.')}, 1000)
     }
     console.log(`player: ${player.cardsValueSum} dealer: ${dealer.cardsValueSum}`)
     return player.cards, dealer.cards, player.cardsValueSum, dealer.cardsValueSum
@@ -114,10 +105,9 @@ const checkPlayerCardSumValue = function () {
         dealer.score += 1
         $('#dealer-scoreboard').text(dealer.score)
         console.log(`dealer new score ${dealer.score}`)
-        setTimeout(function () { swal('BUSTED! You went over 21. You lose!')
-            .then(() => {
-                resetHands()
-            }) }, 400)
+        setTimeout(function () { swal('BUSTED! You went over 21. You lose!').then(() => {
+            resetHands()
+        }) }, 400)
     }
 }
 
@@ -136,17 +126,22 @@ function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
     if (dealerTotal > playerTotal) {
         dealer.score += 1
         $('#dealer-scoreboard').text(dealer.score)
-        console.log(`dealer new score ${dealer.score}`)
-        setTimeout(swal('The dealer wins this round.'), 1000)
+        setTimeout(() => {swal('Jack wins this round!').then(() => {
+            resetHands()
+        })}, 1000)
     }
     else if (dealerTotal < playerTotal) {
         player.score += 1
         $('#player-scoreboard').text(player.score)
         console.log(`player new score ${player.score}`)
-        swal('You win the round!')
+        setTimeout(() => {swal('You win!').then(() => {
+            resetHands()
+        })}, 1000)
     }
     else {
-        swal('This round is a draw.')
+        setTimeout(() => {swal('This round is a draw').then(() => {
+            resetHands()
+        })}, 1000)
     }
 }
 
@@ -165,7 +160,9 @@ function giveCardsToDealerAfterStand() {
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
         player.score += 1
         $('#player-scoreboard').text(player.score)
-        setTimeout(function () { swal('The dealer busted. You win!') }, 1500)
+        setTimeout(function () { swal('The dealer busted. You win!').then(() => {
+            resetHands()
+        })}, 1000)
     }
     else {
         console.log(`Dealer total: ${dealer.cardsValueSum}`)
