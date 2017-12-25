@@ -49,7 +49,21 @@ const dealer = {
 
 const bets = {
     currentAmount: 1,
-    startingBank: 500
+    bank: 500,
+    changeBet: function(amount) {
+        this.currentAmount = amount
+    },
+    winHand: function() {
+        this.bank += this.currentAmount
+        console.log(this.bank)
+
+        $('#bank-amount').text(this.bank)
+
+    },
+    loseHand: function() {
+        this.bank -= this.currentAmount
+        $('#bank-amount').text(this.bank)
+    }
 }
 
 // Each card dealt is dealt to this object that contains value, image
@@ -64,7 +78,6 @@ function dealFirstFourCards() {
     for (let i = 0; i < 4; i++) {
         console.log(deckItems.shuffledCards)
         const dealtCardObj = deckItems.shuffledCards.shift()
-        console.log(dealtCardObj)
         // first and third go to Player. Tracking values, objects, and images
         if (i % 2 === 0) {
             player.cardsValueSum += dealtCardObj.value
@@ -91,15 +104,21 @@ function dealFirstFourCards() {
     // if Player starts 21, then they automatically win the round 
     // got a blackjack while testing and this
     if (player.cardsValueSum === 21) {
-        player.score += 1
+        player.score += bets.currentAmount
         $('#player-scoreboard').text(player.score)
-        setTimeout(() => {swal('BLACKJACK! You win!')}, 1000)
+        setTimeout(() => {
+            swal('BLACKJACK! You win!')
+            bets.winHand()
+        }, 1000)
     }
     // If Player did not get 21 immediately and the Dealer does get 21 after the deal, then the dealer automatically wins
     else if (dealer.cardsValueSum === 21) {
-        dealer.score += 1
+        dealer.score += bets.currentAmount
         $('#dealer-scoreboard').text(dealer.score)
-        setTimeout(() => {swal('Jack Black with a Blackjack! You lose.')}, 1000)
+        setTimeout(() => {
+            swal('Jack Black with a Blackjack! You lose.')
+            bets.loseHand()
+        }, 1000)
     }
     console.log(`player: ${player.cardsValueSum} dealer: ${dealer.cardsValueSum}`)
     return player.cards, dealer.cards, player.cardsValueSum, dealer.cardsValueSum
@@ -107,10 +126,11 @@ function dealFirstFourCards() {
 
 const checkPlayerCardSumValue = function () {
     if (player.cardsValueSum > 21) {
-        dealer.score += 1
+        dealer.score += bets.currentAmount
         $('#dealer-scoreboard').text(dealer.score)
         console.log(`dealer new score ${dealer.score}`)
         setTimeout(function () { swal('BUSTED! You went over 21. You lose!').then(() => {
+            bets.loseHand()
             resetHands()
         })}, 400)
     }
@@ -129,17 +149,20 @@ function resetHands() {
 
 function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
     if (dealerTotal > playerTotal) {
-        dealer.score += 1
+        dealer.score += bets.currentAmount
         $('#dealer-scoreboard').text(dealer.score)
         setTimeout(() => {swal('Jack wins this round!').then(() => {
+            bets.loseHand()
             resetHands()
         })}, 1000)
     }
     else if (dealerTotal < playerTotal) {
-        player.score += 1
+        player.score += bets.currentAmount
+        bets.bank += bets.currentAmount
         $('#player-scoreboard').text(player.score)
         console.log(`player new score ${player.score}`)
         setTimeout(() => {swal('You win!').then(() => {
+            bets.winHand()
             resetHands()
         })}, 1000)
     }
@@ -159,18 +182,17 @@ function giveCardsToDealerAfterStand() {
         dealer.cards.push(dealtCardObj)
         $("#dealer-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
     }
-    console.log(`Dealer total: ${dealer.cardsValueSum}`)
     // return dealer.cardsValueSum, dealer.cardss
     if (dealer.cardsValueSum > 21) {
-        console.log(`Dealer total: ${dealer.cardsValueSum}`)
-        player.score += 1
+        player.score += bets.currentAmount
         $('#player-scoreboard').text(player.score)
         setTimeout(function () { swal('The dealer busted. You win!').then(() => {
+            bets.winHand()
             resetHands()
         })}, 1000)
+        
     }
     else {
-        console.log(`Dealer total: ${dealer.cardsValueSum}`)
         setTimeout(compareDealerAndPlayerTotals(dealer.cardsValueSum, player.cardsValueSum), 1000)
     }
 }
@@ -187,10 +209,8 @@ $('#hit').on('click', function () {
     dealtCardObj = deckItems.shuffledCards.shift()
     dealtCardImage = `${dealtCardObj.value}${dealtCardObj.suit}.png`
     player.cardsValueSum += dealtCardObj.value
-    console.log(player.cardsValueSum)
     player.cards.push(dealtCardObj)
     $("#player-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
-    console.log(`Player's Card Value Total: ${player.cardsValueSum}`) // will need to place DOM image replacement here
     setTimeout(checkPlayerCardSumValue(), 5000)
     return player.cards, player.cardsValueSum
 })
