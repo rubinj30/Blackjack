@@ -10,6 +10,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex: 1 0 auto;
 }
 
 .dark-grey-color {
@@ -42,7 +43,8 @@ main {
 .right-side {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  align-items: space-between;
 }
 
 .face-photo {
