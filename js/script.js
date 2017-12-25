@@ -47,6 +47,11 @@ const dealer = {
     score: 0
 }
 
+const bets = {
+    currentAmount: 1,
+    startingBank: 500
+}
+
 // Each card dealt is dealt to this object that contains value, image
 let dealtCardObj = {}
 
@@ -169,6 +174,7 @@ function giveCardsToDealerAfterStand() {
         setTimeout(compareDealerAndPlayerTotals(dealer.cardsValueSum, player.cardsValueSum), 1000)
     }
 }
+
 
 // DEAL CARDS OUT AND PLAY GAME 
 deckItems.shuffleCards()
