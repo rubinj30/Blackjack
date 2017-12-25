@@ -48,15 +48,13 @@ const dealer = {
 }
 
 const bets = {
-    currentAmount: 1,
+    currentAmount: 5,
     bank: 500,
-    changeBet: function(amount) {
+    changeAmount: function(amount) {
         this.currentAmount = amount
     },
     winHand: function() {
         this.bank += this.currentAmount
-        console.log(this.bank)
-
         $('#bank-amount').text(this.bank)
 
     },
@@ -76,7 +74,6 @@ function dealFirstFourCards() {
     // resets for round when 'Deal is clicked'
     resetHands()
     for (let i = 0; i < 4; i++) {
-        console.log(deckItems.shuffledCards)
         const dealtCardObj = deckItems.shuffledCards.shift()
         // first and third go to Player. Tracking values, objects, and images
         if (i % 2 === 0) {
@@ -128,7 +125,6 @@ const checkPlayerCardSumValue = function () {
     if (player.cardsValueSum > 21) {
         dealer.score += bets.currentAmount
         $('#dealer-scoreboard').text(dealer.score)
-        console.log(`dealer new score ${dealer.score}`)
         setTimeout(function () { swal('BUSTED! You went over 21. You lose!').then(() => {
             bets.loseHand()
             resetHands()
@@ -158,9 +154,7 @@ function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
     }
     else if (dealerTotal < playerTotal) {
         player.score += bets.currentAmount
-        bets.bank += bets.currentAmount
         $('#player-scoreboard').text(player.score)
-        console.log(`player new score ${player.score}`)
         setTimeout(() => {swal('You win!').then(() => {
             bets.winHand()
             resetHands()
@@ -222,3 +216,21 @@ $('#stand').on('click', function () {
 
 // also deal out other cards
 $('#stand').on('click', giveCardsToDealerAfterStand)
+
+
+
+// choose bettinng amount 
+$('#five').on('click', function() {
+    bets.changeAmount(5)
+    console.log(bets.currentAmount)
+})
+
+$('#ten').on('click', function() {
+    bets.changeAmount(10)
+    console.log(bets.currentAmount)
+})
+
+$('#twenty-five').on('click', function() {
+    bets.changeAmount(25)
+    console.log(bets.currentAmount)
+})
