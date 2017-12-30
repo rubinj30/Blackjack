@@ -50,15 +50,15 @@ const dealer = {
 const bets = {
     currentAmount: 5,
     bank: 500,
-    changeAmount: function(amount) {
+    changeAmount: function (amount) {
         this.currentAmount = amount
     },
-    winHand: function() {
+    winHand: function () {
         this.bank += this.currentAmount
         $('#bank-amount').text(this.bank)
 
     },
-    loseHand: function() {
+    loseHand: function () {
         this.bank -= this.currentAmount
         $('#bank-amount').text(this.bank)
     }
@@ -121,14 +121,35 @@ function dealFirstFourCards() {
     return player.cards, dealer.cards, player.cardsValueSum, dealer.cardsValueSum
 }
 
+function checkAceValue(participant) {
+    // if participant hand is above 21, check for Aces
+    // if there is an ace causing value to be above 21, then subtract 10 to make the value of the Ace 1
+    if (participant.cardsValueSum > 21) {
+
+        for (let i = 0; i < participant.cards.length; i++) {
+            if (participant.cards[i]['card'] === 'A') { 
+                participant.cards[i]['card'] = 'C' // renamed Ace from 'A' to 'C'
+                participant.cards[i]['value'] = 1
+                participant.cardsValueSum -= 10
+                break
+            }
+        }
+    }
+}
+
 const checkPlayerCardSumValue = function () {
+    console.log(`player - ${player.cardsValueSum}`)
+    checkAceValue(player)
+    console.log(`player - ${player.cardsValueSum}`)
     if (player.cardsValueSum > 21) {
         dealer.score += bets.currentAmount
         $('#dealer-scoreboard').text(dealer.score)
-        setTimeout(function () { swal('BUSTED! You went over 21. You lose!').then(() => {
-            bets.loseHand()
-            resetHands()
-        })}, 400)
+        setTimeout(function () {
+            swal('BUSTED! You went over 21. You lose!').then(() => {
+                bets.loseHand()
+                resetHands()
+            })
+        }, 400)
     }
 }
 
@@ -147,23 +168,29 @@ function compareDealerAndPlayerTotals(dealerTotal, playerTotal) {
     if (dealerTotal > playerTotal) {
         dealer.score += bets.currentAmount
         $('#dealer-scoreboard').text(dealer.score)
-        setTimeout(() => {swal('Jack wins this round!').then(() => {
-            bets.loseHand()
-            resetHands()
-        })}, 1000)
+        setTimeout(() => {
+            swal('Jack wins this round!').then(() => {
+                bets.loseHand()
+                resetHands()
+            })
+        }, 1000)
     }
     else if (dealerTotal < playerTotal) {
         player.score += bets.currentAmount
         $('#player-scoreboard').text(player.score)
-        setTimeout(() => {swal('You win!').then(() => {
-            bets.winHand()
-            resetHands()
-        })}, 1000)
+        setTimeout(() => {
+            swal('You win!').then(() => {
+                bets.winHand()
+                resetHands()
+            })
+        }, 1000)
     }
     else {
-        setTimeout(() => {swal('This round is a draw').then(() => {
-            resetHands()
-        })}, 1000)
+        setTimeout(() => {
+            swal('This round is a draw').then(() => {
+                resetHands()
+            })
+        }, 1000)
     }
 }
 
@@ -176,21 +203,24 @@ function giveCardsToDealerAfterStand() {
         dealer.cards.push(dealtCardObj)
         $("#dealer-cards").append(`<img class='card-image-size' src='./images/${dealtCardObj.card}${dealtCardObj.suit}.png' />`)
     }
-    // return dealer.cardsValueSum, dealer.cardss
+    console.log(`dealer - ${dealer.cardsValueSum}`)
+    checkAceValue(dealer)
+    console.log(`dealer - ${dealer.cardsValueSum}`)
     if (dealer.cardsValueSum > 21) {
         player.score += bets.currentAmount
         $('#player-scoreboard').text(player.score)
-        setTimeout(function () { swal('The dealer busted. You win!').then(() => {
-            bets.winHand()
-            resetHands()
-        })}, 1000)
-        
+        setTimeout(function () {
+            swal('The dealer busted. You win!').then(() => {
+                bets.winHand()
+                resetHands()
+            })
+        }, 1000)
+
     }
     else {
         setTimeout(compareDealerAndPlayerTotals(dealer.cardsValueSum, player.cardsValueSum), 1000)
     }
 }
-
 
 // DEAL CARDS OUT AND PLAY GAME 
 deckItems.shuffleCards()
@@ -220,17 +250,17 @@ $('#stand').on('click', giveCardsToDealerAfterStand)
 
 
 // choose bettinng amount 
-$('#five').on('click', function() {
+$('#five').on('click', function () {
     bets.changeAmount(5)
     console.log(bets.currentAmount)
 })
 
-$('#ten').on('click', function() {
+$('#ten').on('click', function () {
     bets.changeAmount(10)
     console.log(bets.currentAmount)
 })
 
-$('#twenty-five').on('click', function() {
+$('#twenty-five').on('click', function () {
     bets.changeAmount(25)
     console.log(bets.currentAmount)
 })

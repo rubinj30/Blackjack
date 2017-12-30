@@ -1,3 +1,7 @@
+/* * {
+  border: black 1px solid;
+} */
+
 body {
     display: flex;
     min-height: 100vh;
@@ -13,7 +17,7 @@ main {
   flex: 1 0 auto;
 }
 
-.dark-grey-color {
+.transparent-black {
   background-color: rgba(0,0,0, 0.6)
 }
 
@@ -53,6 +57,13 @@ main {
   border-radius: 75%
 }
 
+@media (max-width: 700px) {
+  .face-photo {
+    width: 0px;
+    height: 0px;
+  }
+}
+
 #card-table {
   padding-top: 5vh;
   display: flex;
@@ -68,16 +79,23 @@ main {
 .card-image-size {
   height: 220px;
   width: 150px;
-  margin: 0 5px;
+  margin: 5px;
   border-radius: 5px;
   box-shadow: 0 8px 6px -6px black;
   position:relative;
-  /* took a border I found online and made the px's much higher for 
-  shadow to appear better on on the felt background */
   -webkit-box-shadow:0 5px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     -moz-box-shadow:0 5px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
       box-shadow:0 7px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   }
+
+@media (max-width: 700px) {
+  .card-image-size {
+    height: 150px;
+    width: 100px;
+    margin: 5px;
+
+  }
+}
 
 hr {
   width: 90%;
@@ -89,9 +107,7 @@ hr {
   align-items: center;
 }
 
-.bet-button {
-  background-color: #C62828;
-}
+
 
 footer {
   display: flex;
@@ -108,4 +124,8 @@ footer {
 
 .brand-logo {
   text-align: center;
+}
+
+.swal-button {
+  background-color: black;
 }
