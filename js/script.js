@@ -52,7 +52,7 @@ const bets = {
     bank: 500,
     changeAmount: function (amount) {
         this.currentAmount = amount
-        $('#current-bet-amount').replaceWith(`<div id='current-bet-amount' class='bet-${this.currentAmount}'>${this.currentAmount}</div>`)
+        $('#current-bet-amount').replaceWith(`<div id='current-bet-amount' class='bet-${this.currentAmount} slideUp'>${this.currentAmount}</div>`)
     },
     winHand: function () {
         this.bank += this.currentAmount

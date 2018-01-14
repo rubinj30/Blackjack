@@ -81,11 +81,11 @@ slideUp
 */
 
 
-.slideUp{
+.slideUp {
 	animation-name: slideUp;
 	-webkit-animation-name: slideUp;	
 
-	animation-duration: 1s;	
+	animation-duration: 2s;	
 	-webkit-animation-duration: 1s;
 
 	animation-timing-function: ease;	
