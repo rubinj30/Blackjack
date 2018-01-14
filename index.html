@@ -5,6 +5,7 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
         media="screen,projection" />
@@ -20,16 +21,16 @@
     <nav class="transparent-black">
         <div>
             <div class="container">
-                <a href="#" class="brand-logo">JackBlack BlackJack</a>
+                <a href="#" class="heading-text">JackBlack BlackJack</a>
             </div>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
                     <a href="#">How To Play</a>
                 </li>
                 <li>
                     <a href="#">Placeholder</a>
                 </li>
-            </ul>
+            </ul> -->
         </div>
     </nav>
     <main>
@@ -64,22 +65,22 @@
         </div>
         <div class='side right-side'>
             <div class='side-text betting'>
-                <div class='current-bet'>
-                    <div>Current bet:</div>
+                <div class='current-bet-container'>
+                    <div class='right-side-text '>Current bet:</div>
                     <div class='bet-amount-holder'>
                         <div class='dollar-sign'>$ </div>
-                        <div id='current-bet-amount'>
+                        <div id='current-bet-amount' class='bet-5'>
                             <div>5</div>
                         </div>
                     </div>
                 </div>
-                <p>Bet Options:</p>
-                <div>
+                <div class='right-side-text bet-options'>Bet Options</div>
+                <div class='bet-options-container'>
                     <div class="waves-effect waves-light btn transparent-black-button" id='five'>5</div>
                     <div class="waves-effect waves-light btn transparent-black-button" id='ten'>10</div>
                     <div class="waves-effect waves-light btn transparent-black-button" id='twenty-five'>25</div>
                 </div>
-                <p class="bank">Bank: $
+                <p class="bank right-side-text">Bank: $
                     <span id='bank-amount'>500</span>
                 </p>
             </div>

@@ -3,25 +3,33 @@
 ## Link to playable version
 http://jackblackblackjack.bitballoon.com/
 
-## How to play 
-Go face to face with Jack Black in Blackjack. 
+## Background
+This was my first project for my Web Development course at General Assembly.
 
-Blackjack is a game where you try to get a total card value of 21, or at least closer to it than Jack Black, without going over 21 (going over 21 is known as a "Bust". Jack gets to keep one card face down so you can't tell what the total value of his cards are. As soon as you are done adding cards to your hand (each time you do this you are "Hitting") to try and get 21 or close to it, he flips his face-down card over and then takes another card until he has 17 or higher. So while he does have the advantage of you not seeing both of his cards, he has to continue hitting until he gets to 17. You should strategically base your decisions to hit, based on the face-up card you can see in Jack Black's hand. 
 
-If someone is dealt a 21 in the first two cards, then they automatically win with Jack Black. I mean Blackjack. 
+## What I learned
+- Planning ahead and focusing on User Stories will pay off in the end
+- How Object-Oriented Programming can be very beneficial for larger projects
+- Became comfortable with manipulating the DOM
+- Put out a working product and not be afraid to do major refactoring to clean up, make it more efficient, or add new features
+
 
 ## Technologies/Frameworks used
 - JavaScript
 - jQuery
 - Materialize
+- HTML/CSS
+- BootStrap
 
 ## Future development
-- Add API call for weather widgets showing current weather to popular gambling destinations
+- Add API calls for weather widgets showing current weather to popular gambling destinations
 - Maybe add flight price widgets, too
-- Display odds 
+- Option to display odds
+- Animations for cards sliding in and out
 - if 5 cards are dealt to player but they haven't busted, they automatically win 
 - Connect to PayPal and Bitcoin and allow for real gambling
 - add sound bites and more customization specific to Jack Black 
+- Re-write entirely with React
 
 ### Trello board
 https://trello.com/b/ziou0Y0F/project-1

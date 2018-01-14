@@ -40,6 +40,13 @@ main {
 
 .side-text {
   color: white;
+  font-size: 20px;
+}
+
+@media (max-width: 650px) {
+  .side-text{
+    font-size: 14px;
+  }
 }
 
 .left-side {
@@ -129,32 +136,100 @@ footer {
   height: 8vh;
 }
 
-.brand-logo {
+.container {
+  display: flex;
+  justify-content: center;
+}
+.heading-text{
   text-align: center;
+  font-size: 38px;
 }
 
-.swal-button {
+@media (max-width: 650px) {
+  .heading-text {
+    font-size: 25px;
+  }
+}
+
+.swal-button--confirm {
   background-color: black;
 }
 
-.current-bet {
+.current-bet-container {
   display: flex;
   flex-direction: column;
+
 }
 
 #current-bet-amount {
   width: 85px;
   height: 85px;
-  border: 4px solid #872727;
-  background-color: #ab3434;
+  
   border-radius: 50%;
   font-family: 'Orbitron', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* text-decoration: underline; */
+
 }
 
+.right-side-text {
+  text-align: center;
+}
+
+@media (max-width: 650px) {
+  #current-bet-amount {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* text-decoration: underline; */
+  }
+  
+}
+
+.bet-5 {
+  background-color: #ab3434;
+  border: 6px solid #872727;
+}
+
+@media (max-width: 650px) {
+  .bet-5 {
+    background-color: #ab3434;
+    border: 6px solid #872727;
+  }
+}
+
+.bet-10 {
+  background-color: #2778f9;
+  border: 6px solid #033e9e;
+}
+
+@media (max-width: 650px) {
+  .bet-10 {
+    background-color: #2778f9;
+    border: 4px solid #033e9e;
+  }
+}
+
+.bet-25 {
+  background-color: green;
+  border: 4px solid #094903
+}
+
+@media (max-width: 650px) {
+  .bet-25 {
+    background-color: green;
+    border: 4px solid #094903
+  }
+}
+
+.bank {
+  padding-top: 30px;
+}
 .bet-amount-vertical-center {
   display: flex;
   align-items: center;
@@ -163,4 +238,10 @@ footer {
 .bet-amount-holder {
   display: flex;
   justify-content: center;
+  padding-bottom: 35px;
+}
+
+.bet-options-container {
+  display: flex;
+  flex-direction: column;
 }
