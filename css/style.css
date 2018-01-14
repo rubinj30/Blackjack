@@ -199,7 +199,7 @@ footer {
 @media (max-width: 650px) {
   .bet-5 {
     background-color: #ab3434;
-    border: 6px solid #872727;
+    border: 3px solid #872727;
   }
 }
 
@@ -211,19 +211,19 @@ footer {
 @media (max-width: 650px) {
   .bet-10 {
     background-color: #2778f9;
-    border: 4px solid #033e9e;
+    border: 3px solid #033e9e;
   }
 }
 
 .bet-25 {
   background-color: green;
-  border: 4px solid #094903
+  border: 6px solid #094903
 }
 
 @media (max-width: 650px) {
   .bet-25 {
     background-color: green;
-    border: 4px solid #094903
+    border: 3px solid #094903
   }
 }
 
