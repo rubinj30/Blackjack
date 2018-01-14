@@ -72,8 +72,12 @@ let dealtCardObj = {}
 // One card to Player, one to dealer, one to player, one to dealer
 function dealFirstFourCards() {
 
+
+    checkNumberOfCardsLeft()
     // resets for round when 'Deal is clicked'
     resetHands()
+
+
     for (let i = 0; i < 4; i++) {
         const dealtCardObj = deckItems.shuffledCards.shift()
         // first and third go to Player. Tracking values, objects, and images
@@ -151,6 +155,14 @@ const checkPlayerCardSumValue = function () {
                 resetHands()
             })
         }, 400)
+    }
+}
+
+function checkNumberOfCardsLeft() {
+    if (deckItems.shuffledCards.length < 10) {
+    deckItems.shuffledCards = []
+    deckItems.unshuffledCards = []
+    deckItems.shuffleCards()
     }
 }
 
@@ -247,8 +259,6 @@ $('#stand').on('click', function () {
 
 // also deal out other cards
 $('#stand').on('click', giveCardsToDealerAfterStand)
-
-
 
 // choose bettinng amount 
 $('#five').on('click', function () {
