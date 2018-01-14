@@ -52,6 +52,7 @@ const bets = {
     bank: 500,
     changeAmount: function (amount) {
         this.currentAmount = amount
+        $('#current-bet-amount').text(this.currentAmount)
     },
     winHand: function () {
         this.bank += this.currentAmount
@@ -127,7 +128,7 @@ function checkAceValue(participant) {
     if (participant.cardsValueSum > 21) {
 
         for (let i = 0; i < participant.cards.length; i++) {
-            if (participant.cards[i]['card'] === 'A') { 
+            if (participant.cards[i]['card'] === 'A') {
                 participant.cards[i]['card'] = 'C' // renamed Ace from 'A' to 'C'
                 participant.cards[i]['value'] = 1
                 participant.cardsValueSum -= 10
@@ -264,3 +265,7 @@ $('#twenty-five').on('click', function () {
     bets.changeAmount(25)
     console.log(bets.currentAmount)
 })
+
+// $(document).ready(function() {
+//     $('select').material_select();
+// });

@@ -18,7 +18,18 @@ main {
 }
 
 .transparent-black {
-  background-color: rgba(0,0,0, 0.6)
+  background-color: rgba(0,0,0, 0.5);
+  box-shadow: 1px 1px 1px 1px black;
+}
+
+.transparent-black-button {
+  background-color: rgba(0,0,0, 0.3);
+  box-shadow: 1px 1px 1px 1px black;
+}
+
+.transparent-black-button:hover {
+  background-color: rgba(0,0,0, 0.65);
+  box-shadow: 1px 1px 1px 1px black;
 }
 
 .side {
@@ -76,16 +87,20 @@ main {
   justify-content: center; 
 }
 
+#card-image-1, #card-image-2, #card-image-3, #card-image-4 {
+  box-shadow: 0 8px 6px -6px black;
+}
+
 .card-image-size {
   height: 220px;
   width: 150px;
   margin: 5px;
   border-radius: 5px;
-  box-shadow: 0 8px 6px -6px black;
+  /* box-shadow: 0 8px 6px -6px black; */
   position:relative;
   -webkit-box-shadow:0 5px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     -moz-box-shadow:0 5px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-      box-shadow:0 7px 9px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+      box-shadow:0 7px 9px rgba(12, 4, 4, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   }
 
 @media (max-width: 700px) {
@@ -93,7 +108,6 @@ main {
     height: 150px;
     width: 100px;
     margin: 5px;
-
   }
 }
 
@@ -107,8 +121,6 @@ hr {
   align-items: center;
 }
 
-
-
 footer {
   display: flex;
   flex-direction: row;
@@ -117,15 +129,38 @@ footer {
   height: 8vh;
 }
 
-#deal, #hit, #stand {
-  background-image: url('./../images/FELT.jpg');
-  box-shadow: 1px 1px 1px 1px black;
-}
-
 .brand-logo {
   text-align: center;
 }
 
 .swal-button {
   background-color: black;
+}
+
+.current-bet {
+  display: flex;
+  flex-direction: column;
+}
+
+#current-bet-amount {
+  width: 85px;
+  height: 85px;
+  border: 4px solid #872727;
+  background-color: #ab3434;
+  border-radius: 50%;
+  font-family: 'Orbitron', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-decoration: underline; */
+}
+
+.bet-amount-vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+.bet-amount-holder {
+  display: flex;
+  justify-content: center;
 }

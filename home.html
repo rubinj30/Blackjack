@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="css/style.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="shortcut icon" type="image/png" href="./images/JB_card.png" />
+    <title>Blackjack</title>
 </head>
 
 <body>
-    <nav class="dark-grey-color">
+    <nav class="transparent-black">
         <div>
             <div class="container">
                 <a href="#" class="brand-logo">JackBlack BlackJack</a>
@@ -29,59 +32,48 @@
         </div>
     </nav>
     <main>
-        <div class='side left-side'>
-            <div class='dealer-side players-info'>
-                <p class='side-text'>Jack</p>
-                <img class='face-photo z-depth-1' id='jack-black-face' src="https://i.pinimg.com/736x/4b/4b/96/4b4b96102fe04d5ac22e66d013cf96a8--jack-black-black-star.jpg"
-                    alt="jack black">
-            </div>
-            <p class='side-text'>VS</p>
-            <div class="player-side players-info">
-                <p class='side-text'>Challenger</p>
-            </div>
-        </div>
-        <div id='card-table'>
 
 
-        </div>
-        <div class='side right-side'>
-            <p class='side-text'>Score</p>
-            <p class='side-text' id='dealer-scoreboard'>0</p>
-            <p class='side-text' id='player-scoreboard'>0</p>
-            <hr>
-            <div class='side-text betting'>
-                <p>Bet Amount:</p>
-                <div>
-                    <a class="waves-effect waves-light btn dark-grey-color">1</a>
-                    <a class="waves-effect waves-light btn dark-grey-color">5</a>
-                    <a class="waves-effect waves-light btn dark-grey-color">10</a>
-                </div>
-                <p class="bank">Bank: $100</p>
-            </div>
-        </div>
 
 
-        </div>
+  <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
+
     </main>
 
 
     <!-- <img class="responsive-img z-depth-3" src="https://goo.gl/XS34fL"> -->
-    <footer class="footer-copyright section page-footer dark-grey-color">
-        <p>Gambling Destinations?</p>
-        <p>Vegas temp:
+    <footer class="footer-copyright section page-footer transparent-black">
+        <div>
+            Gambling Destinations?
+
+        </div>
+        <div>Vegas temp:
             <span id="vegas-temp">60</span>
-        </p>
-        <p>Atlantic City temp:
+        </div>
+        <div>Atlantic City temp:
             <span id="vegas-temp">40</span>
-        </p>
-        <p>JackBlack temp:
+        </div>
+        <div>JackBlack temp:
             <span id="jb-temp">98.6</span>
-        </p>
+        </div>
     </footer>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 </body>
 
 </html>

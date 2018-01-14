@@ -4,6 +4,7 @@
 <head>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
         media="screen,projection" />
@@ -46,7 +47,7 @@
         </div>
         <div id='card-table'>
             <div class='where-cards-dealt' id='dealer-cards'>
-                <img class='card-image-size' id='card-image-1' src='./images/JB_card.jpg' />
+                <img class='card-image-size slideUp' id='card-image-1' src='./images/JB_card.jpg' />
                 <img class='card-image-size' id='card-image-3' src='./images/JB_card.jpg' />
             </div>
             <div class='where-cards-dealt' id='player-cards'>
@@ -55,24 +56,28 @@
             </div>
 
             <div class="bottom-buttons center-align section">
-                <a class="waves-effect waves-light btn" id='deal' href="#">Deal</a>
-                <a class="waves-effect waves-light btn" id='hit' href="#">Hit</a>
-                <a class="waves-effect waves-light btn" id='stand' href="#">Stand</a>
+                <div class="waves-effect waves-light btn transparent-black-button" id='deal' href="#">Deal</div>
+                <div class="waves-effect waves-light btn transparent-black-button" id='hit' href="#">Hit</div>
+                <div class="waves-effect waves-light btn transparent-black-button" id='stand' href="#">Stand</div>
             </div>
 
         </div>
         <div class='side right-side'>
-            <!-- <p class='side-text'>Score</p>
-            <p class='side-text' id='dealer-scoreboard'>0</p>
-            <p class='side-text' id='player-scoreboard'>0</p>
-            <hr> -->
             <div class='side-text betting'>
-                <p>Your current bet:</p>
+                <div class='current-bet'>
+                    <div>Current bet:</div>
+                    <div class='bet-amount-holder'>
+                        <div class='dollar-sign'>$ </div>
+                        <div id='current-bet-amount'>
+                            <div>5</div>
+                        </div>
+                    </div>
+                </div>
                 <p>Bet Options:</p>
                 <div>
-                    <a class="waves-effect waves-light btn transparent-black" id='five'>5</a>
-                    <a class="waves-effect waves-light btn transparent-black" id='ten'>10</a>
-                    <a class="waves-effect waves-light btn transparent-black" id='twenty-five'>25</a>
+                    <div class="waves-effect waves-light btn transparent-black-button" id='five'>5</div>
+                    <div class="waves-effect waves-light btn transparent-black-button" id='ten'>10</div>
+                    <div class="waves-effect waves-light btn transparent-black-button" id='twenty-five'>25</div>
                 </div>
                 <p class="bank">Bank: $
                     <span id='bank-amount'>500</span>
@@ -86,7 +91,7 @@
 
 
     <!-- <img class="responsive-img z-depth-3" src="https://goo.gl/XS34fL"> -->
-    <footer class="footer-copyright section page-footer transparent-black show-on-large">
+    <footer class="footer-copyright section page-footer transparent-black">
         <div>
             Gambling Destinations?
 
@@ -101,8 +106,9 @@
             <span id="jb-temp">98.6</span>
         </div>
     </footer>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 </body>
