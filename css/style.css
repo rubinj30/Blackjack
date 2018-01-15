@@ -75,7 +75,7 @@ main {
   border-radius: 75%
 }
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   .face-photo {
     width: 0px;
     height: 0px;
@@ -110,10 +110,10 @@ main {
       box-shadow:0 7px 9px rgba(12, 4, 4, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   }
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   .card-image-size {
-    height: 150px;
-    width: 100px;
+    height: 120px;
+    width: 80px;
     margin: 5px;
   }
 }
