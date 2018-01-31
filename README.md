@@ -4,22 +4,19 @@
 http://jackblackblackjack.bitballoon.com/
 
 ## Background
-This was my first project for my Web Development course at General Assembly.
-
+This was my first project for my Web Development course at General Assembly. 
 
 ## What I learned
-- Planning ahead and focusing on User Stories will pay off in the end
+- Planning ahead and focusing on user stories will pay off in the end
 - How Object-Oriented Programming can be very beneficial for larger projects
 - Became comfortable with manipulating the DOM
 - Put out a working product and not be afraid to do major refactoring to clean up, make it more efficient, or add new features
-
 
 ## Technologies/Frameworks used
 - JavaScript
 - jQuery
 - Materialize
 - HTML/CSS
-- BootStrap
 
 ## Future development
 - Add API calls for weather widgets showing current weather to popular gambling destinations
