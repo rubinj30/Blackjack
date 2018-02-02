@@ -5,38 +5,54 @@
 const axios = require('axios')
 
 const locations = [
-    {
+    reno = {
         city: "Reno",
         state: "NV",
         temperature: '',
         generalWeather: '',
-        iconUrl: ''
+        iconUrl: '',
+        temperature: '',
+
     },
-    {
+    vegas = {
         city: "Las_Vegas",
         state: "NV",
         generalWeather: '',
-        iconUrl: ''
+        iconUrl: '',
+        temperature: '',
+
     },
-    {
-        city: 'Atlantic-City',
+    atlanticCity = {
+        city: 'Atlantic_City',
         state: "NJ",
         generalWeather: '',
         iconUrl: '',
-
+        temperature: '',
+        
     }
 ]
-
-const getWeather = (city, state) => {
+// console.log(locations)
+const getWeather = (city, state, i) => {
     const url = `http://api.wunderground.com/api/500fc45859e1f98f/conditions/q/${state}/${city}.json`
     axios.get(url)
         .then((response) => {
-            console.log(response.data.current_observation.temp_f)
-            // locations[i].temperature = response.data
+            console.log(response.data.current_observation)
+            locations[i].temperature = response.data.current_observation.temp_f
+            locations[i].iconUrl = response.data.current_observation.icon_url
 
-            return response.data
+
+            // console.log(response.data
         })
     }
 
-getWeather(locations[0].city, locations[0].state)
+// getWeather(reno.city, reno.state, 0)
+// getWeather(vegas.city, vegas.state, 1)
+// getWeather(atlanticCity.city, atlanticCity.state, 2)
+
+locations.forEach( async (location, index, array) => {
+    await getWeather(location.city, location.state, index)
+    console.log(location)
+})
+
+setTimeout(() => {console.log(locations)}, 2000)
 
